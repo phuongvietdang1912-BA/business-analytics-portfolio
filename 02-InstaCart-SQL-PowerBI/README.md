@@ -59,7 +59,7 @@ ETL runs inside a single transaction with full rollback on failure (file `07_loa
 
 ## Data Model
 
-![Star Schema](images/star_schema.png)
+<img width="1224" height="764" alt="image" src="https://github.com/user-attachments/assets/ef2725ed-d108-44df-a362-4f1c3ab58b0b" />
 
 | Table | Type | Grain |
 |---|---|---|
@@ -81,28 +81,30 @@ The Power BI report has four pages, each answering one analytical question.
 ### 1. Executive Overview
 *"How is the business performing?"*
 
-![Executive Overview](images/01_executive_overview.png)
+<img width="1295" height="736" alt="image" src="https://github.com/user-attachments/assets/d6169bc1-cdc8-4c9a-a61f-f6393a939780" />
+
 
 KPIs, reorder behaviour curve, and order-timing patterns at a macro level.
 
 ### 2. Product & Category Insight
 *"What do customers buy?"*
 
-![Product & Category Insight](images/02_product_category.png)
+<img width="1300" height="732" alt="image" src="https://github.com/user-attachments/assets/e48b7ebd-f53b-4617-9d39-c7cbb34aa3fa" />
+
 
 Department-level volume vs reorder rate, aisle-level loyalty rankings, and a scatter plot identifying the high-volume + high-loyalty sweet spot.
 
 ### 3. Customer Behavior
 *"Who are the customers?"*
 
-![Customer Behavior](images/03_customer_behavior.png)
+<img width="1294" height="734" alt="image" src="https://github.com/user-attachments/assets/dc286542-a7f7-4403-85cf-22ace25c9f69" />
 
 Customer segmentation by lifetime order count, reorder cadence, and how reorder gaps shrink as customers mature.
 
 ### 4. Basket & Recommendations
 *"How do they buy together — and what should we do?"*
 
-![Basket & Recommendations](images/04_basket_recommendations.png)
+<img width="1303" height="723" alt="image" src="https://github.com/user-attachments/assets/d9c0f0b1-f2fd-4d0b-9708-9ff187cf46fd" />
 
 Department co-purchase pairs (cross-sell candidates), basket size distribution, and products that consistently appear early in the cart (planned staples).
 
@@ -201,7 +203,7 @@ instacart-business-analytics/
 
 ## Author
 
-**\<Your Name\>**
-[LinkedIn](https://linkedin.com/in/your-handle) · [GitHub](https://github.com/your-handle) · \<your-email\>
+**\<Phuong Viet Dang (Jackie)\>**
+[LinkedIn]((https://www.linkedin.com/in/phuongviet1912/)) · [GitHub](https://github.com/your-handle) · \<phuong.vietdang1912@gmail.com\>
 
 Open to data analyst / data engineer roles.
