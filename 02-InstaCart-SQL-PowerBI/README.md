@@ -144,6 +144,7 @@ instacart-business-analytics/
 - SQL Server Management Studio (SSMS) or Azure Data Studio
 - Power BI Desktop
 - The Instacart Online Grocery Basket Analysis dataset from Kaggle: <https://www.kaggle.com/datasets/yasserh/instacart-online-grocery-basket-analysis-dataset>
+- The .pbix file is available on request via [LinkedIn / email].
 
 ### Setup
 
