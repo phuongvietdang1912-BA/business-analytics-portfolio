@@ -1,314 +1,207 @@
-# Instacart Market Basket Analysis — Business Analytics Project
+# Instacart Business Analytics
 
-## 1. Project Overview
+End-to-end SQL + Power BI portfolio project analysing 3.4M Instacart orders to surface reorder behaviour, basket composition, and cross-sell opportunities for an online grocery retailer.
 
-This project analyses the Instacart Market Basket Analysis dataset to understand customer reorder behaviour, basket composition, product/category performance, and cross-category purchasing patterns in an online grocery retail environment. I built a SQL Server-based analytics pipeline that imports raw CSV files, validates data quality, transforms the data into a dimensional warehouse model, and runs business-focused SQL queries to identify reorder drivers, repeat-purchase patterns, and recommendation opportunities. The Power BI dashboard layer is currently in development and will extend these SQL findings into a business-facing visual report.
-
----
-
-## 2. Business Problem
-
-An online grocery retailer needs better visibility into customer reorder behaviour, basket composition, and category relationships in order to improve repeat purchasing, support cross-sell opportunities, and design more effective product recommendation strategies.
-
-This project focuses on answering:
-
-- Which products, aisles, and departments drive the highest purchase and reorder activity?
-- How does reorder behaviour change as customers place more orders?
-- Which product categories are frequently purchased together?
-- What insights can support retention, merchandising, and recommendation strategy?
+<img width="1293" height="727" alt="image" src="https://github.com/user-attachments/assets/bc9728fd-ffe2-406b-9ec5-80f8eaf09a7b" />
 
 ---
 
-## 3. Key Findings
+## Problem Statement
 
-Numbers are rounded for readability.
+An online grocery retailer needs better visibility into customer reorder behaviour, basket composition, and category relationships in order to **improve repeat purchasing**, **support cross-sell opportunities**, and **design more effective product recommendation strategies**.
 
-- **Banana was the most-ordered product**, appearing around **491K times** across customer baskets.
-- **Overall reorder rate was around 59%**, showing that repeat purchasing is a major behaviour pattern in the dataset.
-- **Reorder behaviour strengthened as customers placed more orders**, rising from **0% on first orders** to around **60% by order 8**, suggesting habit formation over repeated shopping cycles.
-- **Produce and dairy eggs formed the strongest cross-category pair**, co-occurring in around **1.84M orders**, indicating a strong natural relationship between fresh produce and staple grocery items.
-- **Milk had one of the highest aisle-level reorder rates at around 78%**, suggesting it behaves as a routine replenishment category.
-- **High-volume departments were not always the highest-reorder departments**, meaning merchandising strategy should separate volume-driving categories from loyalty-driving categories.
+This project answers that need with a full data pipeline: from raw CSV files through to a star-schema data warehouse, validated business queries, and a four-page Power BI report.
 
 ---
 
-## 4. Architecture / Data Model
+## Skills Demonstrated
 
-The project uses a two-schema SQL architecture:
+- **Database design** — star schema with surrogate keys, FK constraints, and dense-key validation
+- **SQL (T-SQL)** — bulk imports, transactional ETL, validation harness, 20 business queries
+- **Data modelling** — Kimball dimensional modelling (fact + 5 dimensions)
+- **Data quality** — automated row-count, duplicate, null, range, orphan, and value-consistency checks
+- **Power BI** — DAX measures, calculated columns, multi-page dashboard design
+- **Business analysis** — translating raw data into commercial recommendations
 
-- **`raw` schema** — stores the imported CSV files in a structure close to the original source data.
-- **`dw` schema** — stores the transformed dimensional model used for analysis and reporting.
+---
 
-The warehouse layer follows a star-schema-style design with five dimension tables and one central fact table.
+## Key Findings
 
-```mermaid
-erDiagram
-    dim_user ||--o{ fact_order_item : user_key
-    dim_order ||--o{ fact_order_item : order_key
-    dim_product ||--o{ fact_order_item : product_key
-    dim_aisle ||--o{ dim_product : aisle_key
-    dim_department ||--o{ dim_product : department_key
+| # | Finding | Business implication |
+|---|---|---|
+| 1 | 59% overall reorder rate; climbs from 0% on order 1 to ~85% by order 5+ | Repeat purchasing is highly predictable once a customer crosses the 5-order threshold |
+| 2 | **Produce + dairy eggs** is the #1 co-purchase pair (~1.8M orders) | Strong bundle candidate; produce appears in 6 of the top 10 pairs as the universal anchor category |
+| 3 | Avg gap between orders is **11 days**; drops from ~15 to ~5 days as customers mature | Send reorder reminders on a fortnightly cadence; tighter for power users |
+| 4 | Sundays/Mondays drive peak volume; 9 AM–5 PM is the active window | Schedule promotions and ad spend around this window |
+| 5 | Pantry has high item volume but the lowest reorder rate (~37%) | Volume outlier — investigate whether pricing or selection is driving one-time purchases |
 
-    dim_user {
-        int user_key
-        int user_id
-    }
+---
 
-    dim_order {
-        int order_key
-        int order_id
-        int user_key
-        string eval_set
-        int order_number
-        int order_dow
-        int order_hour_of_day
-        decimal days_since_prior_order
-    }
+## Architecture
 
-    dim_product {
-        int product_key
-        int product_id
-        string product_name
-        int aisle_key
-        int department_key
-    }
-
-    dim_aisle {
-        int aisle_key
-        int aisle_id
-        string aisle_name
-    }
-
-    dim_department {
-        int department_key
-        int department_id
-        string department_name
-    }
-
-    fact_order_item {
-        bigint fact_order_item_key
-        int order_key
-        int product_key
-        int user_key
-        int order_id
-        int add_to_cart_order
-        bit reordered
-        string source_table
-    }
+```
+CSV files ──▶ raw schema ──▶ dw schema (star) ──▶ Power BI
+              (staging)      (analytics)
+                 │                │
+                 ▼                ▼
+          validation         validation
+          (file 05)          (file 08)
 ```
 
-### 4.1 Design Decisions
+Two-layer warehouse:
 
-- **Surrogate keys** were used in the warehouse layer to create cleaner relationships, reduce dependency on source-system keys, and support future slowly changing dimension design if the model is extended.
-- The central fact table is an **event/transaction fact table at order-item grain**. Each row represents one product within one order. Because the dataset does not include price, revenue, or quantity, the fact table is mainly used for counting events and analysing behavioural fields such as `reordered` and `add_to_cart_order`.
-- A separate date table was not created because the dataset does not include real calendar dates. Instead, time-related attributes such as `order_dow`, `order_hour_of_day`, `order_number`, and `days_since_prior_order` are stored in `dim_order`.
+- **`raw` schema** — direct landing zone for the 6 source CSVs (orders, products, aisles, departments, prior, train). Mirrors the source files 1:1 with no transformation.
+- **`dw` schema** — Kimball star schema. Surrogate keys, FK constraints, and a single fact table referencing 5 dimensions.
 
-### 4.2 Limitations and Known Simplifications
-
-- The dataset does not include real calendar dates, so time analysis is limited to relative patterns such as day of week, hour of day, order sequence, and days since prior order.
-- The dataset does not include price, revenue, profit, or product quantity, so financial performance analysis is not possible from this source alone.
-- The current warehouse model uses a single-load design. Slowly changing dimension logic is not implemented yet, but the use of surrogate keys makes it easier to extend the model later.
+ETL runs inside a single transaction with full rollback on failure (file `07_load_dw.sql`).
 
 ---
 
-## 5. Dataset
+## Data Model
 
-**Dataset:** Instacart Market Basket Analysis  
-**Source:** Kaggle  
-**Dataset link:** https://www.kaggle.com/datasets/psparks/instacart-market-basket-analysis
+![Star Schema](images/star_schema.png)
 
-| File | Purpose | Approx. Row Count |
-|---|---|---:|
-| `orders.csv` | Order-level data including user, order sequence, day of week, hour of day, and days since prior order | 3.4M |
-| `order_products__prior.csv` | Historical order-product transaction rows | 32M |
-| `order_products__train.csv` | Training order-product transaction rows | 1.4M |
-| `products.csv` | Product names and product-to-category mappings | 50K |
-| `aisles.csv` | Aisle-level product hierarchy | 134 |
-| `departments.csv` | Department-level product hierarchy | 21 |
+| Table | Type | Grain |
+|---|---|---|
+| `dw.fact_order_item` | Fact (factless / item-presence) | One row per product per order |
+| `dw.dim_order` | Dimension | One row per order |
+| `dw.dim_user` | Dimension | One row per customer |
+| `dw.dim_product` | Dimension | One row per product |
+| `dw.dim_aisle` | Dimension | One row per aisle |
+| `dw.dim_department` | Dimension | One row per department |
 
----
-
-## 6. Validation Results
-
-After loading the warehouse model, I validated the data using `08_dw_validation.sql`.
-
-The validation checks covered:
-
-- Raw-to-DW row count reconciliation
-- Surrogate-key density checks
-- Fact-to-dimension referential integrity
-- Product-to-aisle and product-to-department integrity
-- Order weekday and hour range checks
-- Source-to-target consistency checks
-
-All validation checks passed.
-
-![DW Validation Summary](images/validation_summary.png)
-
-### 6.1 Reorder Rate by Department
-
-This query compares department-level item volume and reorder rate to identify which departments act as repeat-purchase drivers.
-
-![Reorder Rate by Department](images/reorder_rate_by_department.png)
-
-### 6.2 Department Pair Frequency
-
-This query identifies departments frequently purchased together in the same order. These results support cross-sell and recommendation strategy.
-
-![Department Pair Frequency](images/department_pairs.png)
+The fact is intentionally factless: Instacart provides no price or quantity data, so `reordered` (BIT) and `add_to_cart_order` (INT) are stored as transactional attributes rather than additive measures. `order_id` is retained as a degenerate dimension.
 
 ---
 
-## 7. How to Run
+## Dashboard
 
-Run the SQL files in order from the `sql/` folder.
+The Power BI report has four pages, each answering one analytical question.
 
-### Step 1 — Create database and schemas
+### 1. Executive Overview
+*"How is the business performing?"*
 
-```text
-01_database_setup.sql
-```
+![Executive Overview](images/01_executive_overview.png)
 
-Creates the `InstacartBA` database and the `raw` and `dw` schemas.
+KPIs, reorder behaviour curve, and order-timing patterns at a macro level.
 
-### Step 2 — Create raw tables
+### 2. Product & Category Insight
+*"What do customers buy?"*
 
-```text
-02_raw_tables.sql
-```
+![Product & Category Insight](images/02_product_category.png)
 
-Creates the raw staging tables that mirror the source CSV structure.
+Department-level volume vs reorder rate, aisle-level loyalty rankings, and a scatter plot identifying the high-volume + high-loyalty sweet spot.
 
-### Step 3 — Create indexes and raw views
+### 3. Customer Behavior
+*"Who are the customers?"*
 
-```text
-03_indexes_and_views.sql
-```
+![Customer Behavior](images/03_customer_behavior.png)
 
-Creates supporting indexes and the unified order-product view used for downstream transformation.
+Customer segmentation by lifetime order count, reorder cadence, and how reorder gaps shrink as customers mature.
 
-### Step 4 — Import raw CSV files
+### 4. Basket & Recommendations
+*"How do they buy together — and what should we do?"*
 
-```text
-04_import_raw_data.sql
-```
+![Basket & Recommendations](images/04_basket_recommendations.png)
 
-Before running this file, update the `@BasePath` variable to match the folder where the CSV files are stored.
-
-Example:
-
-```sql
-DECLARE @BasePath NVARCHAR(500) =
-N'C:\Users\Admin\Downloads\InstaCart Online Grocery Market Basket Analysis\';
-```
-
-### Step 5 — Validate raw data
-
-```text
-05_raw_validation.sql
-```
-
-Checks raw table row counts, nulls, duplicates, value ranges, and missing relationships.
-
-### Step 6 — Create DW tables
-
-```text
-06_dw_tables.sql
-```
-
-Creates the dimensional warehouse model, including surrogate keys and foreign key constraints.
-
-### Step 7 — Load DW tables
-
-```text
-07_load_dw.sql
-```
-
-Loads the dimension and fact tables from the raw schema. This file temporarily drops foreign key constraints before truncating and reloading the warehouse tables, then recreates the constraints using `WITH CHECK`.
-
-### Step 8 — Validate DW model
-
-```text
-08_dw_validation.sql
-```
-
-Validates row counts, surrogate-key integrity, foreign key integrity, and source-to-target consistency.
-
-### Step 9 — Run business analysis queries
-
-```text
-09_business_queries.sql
-```
-
-Runs the main SQL analysis queries covering reorder behaviour, basket patterns, department performance, product performance, user behaviour, and cross-category relationships.
+Department co-purchase pairs (cross-sell candidates), basket size distribution, and products that consistently appear early in the cart (planned staples).
 
 ---
 
-## 8. Tech Stack
+## Project Structure
 
-| Tool | Purpose |
-|---|---|
-| SQL Server 2022 Express | Database, raw layer, warehouse model, transformations, validation, and SQL analysis |
-| SQL Server Management Studio | Query development and database management |
-| Power BI Desktop | Dashboard and visual storytelling layer |
-| Kaggle Instacart Dataset | Source dataset |
-
-> Update the SQL Server, SSMS, and Power BI versions before publishing if your installed versions are different.
-
----
-
-## 9. Performance Note
-
-The largest load step is the order-item fact table, which is built from more than 33M order-product rows. On a local machine, the full load time will depend heavily on CPU, memory, disk speed, and whether indexes and foreign key checks are enabled during loading.
-
----
-
-## 10. What’s Next
-
-The SQL pipeline, warehouse model, validation layer, and business query layer are complete.
-
-The next phase is the Power BI dashboard, which will include:
-
-1. **Executive Overview**  
-   Total orders, total users, average basket size, reorder rate, and ordering patterns.
-
-2. **Product and Category Insights**  
-   Department volume, reorder rate, top products, and aisle-level performance.
-
-3. **Customer Repeat Behaviour**  
-   User order frequency, reorder behaviour by order sequence, and basket-size patterns.
-
-4. **Basket and Recommendation Insights**  
-   Department-pair analysis, cross-category relationships, and recommendation opportunities.
+```
+instacart-business-analytics/
+├── README.md
+├── sql/
+│   ├── 01_database_setup.sql        # Database + schemas
+│   ├── 02_raw_tables.sql            # Raw/staging tables
+│   ├── 03_indexes_and_views.sql     # Raw indexes + unified view
+│   ├── 04_import_raw_data.sql       # BULK INSERT from CSVs
+│   ├── 05_raw_validation.sql        # Raw layer data quality checks
+│   ├── 06_dw_tables.sql             # Star schema DDL
+│   ├── 07_load_dw.sql               # Transactional ETL: raw → DW
+│   ├── 08_dw_validation.sql         # DW layer validation harness
+│   └── 09_business_queries.sql      # 20 business analysis queries
+├── powerbi/
+│   └── instacart_analytics.pbix
+└── images/
+    ├── 01_executive_overview.png
+    ├── 02_product_category.png
+    ├── 03_customer_behavior.png
+    ├── 04_basket_recommendations.png
+    └── star_schema.png
+```
 
 ---
 
-## 11. Project Status
+## How to Run
 
-| Component | Status |
-|---|---|
-| SQL database setup | Complete |
-| Raw data import | Complete |
-| Raw data validation | Complete |
-| DW star schema | Complete |
-| DW load process | Complete |
-| DW validation | Complete |
-| Business SQL queries | Complete |
-| Power BI dashboard | In progress |
-| Python analysis | Planned |
-| Final portfolio write-up | Planned |
+### Prerequisites
+- SQL Server 2019+ (or Azure SQL)
+- SQL Server Management Studio (SSMS) or Azure Data Studio
+- Power BI Desktop
+- The Instacart Online Grocery Basket Analysis dataset from Kaggle: <https://www.kaggle.com/datasets/yasserh/instacart-online-grocery-basket-analysis-dataset>
+
+### Setup
+
+1. **Download the dataset** and unzip the 6 CSV files to a local folder.
+
+2. **Update the file path** in `sql/04_import_raw_data.sql`:
+   ```sql
+   DECLARE @BasePath NVARCHAR(500) = N'C:\YourPath\InstaCart\';
+   ```
+
+3. **Run the SQL files in order:**
+   ```
+   01_database_setup.sql
+   02_raw_tables.sql
+   03_indexes_and_views.sql
+   04_import_raw_data.sql
+   05_raw_validation.sql       (verify all checks pass)
+   06_dw_tables.sql
+   07_load_dw.sql
+   08_dw_validation.sql        (verify all checks pass)
+   09_business_queries.sql     (optional — runs analysis queries directly)
+   ```
+
+4. **Open the Power BI file** (`powerbi/instacart_analytics.pbix`) and update the SQL Server connection to point at your local `InstacartBA` database.
 
 ---
 
-## 12. Author
+## Tech Stack
 
-Built by **[Your Name]**  
-LinkedIn: **[Your LinkedIn URL]**  
-Portfolio: **[Your portfolio URL]**
+- **SQL Server** — relational database
+- **T-SQL** — DDL, ETL, validation, business queries
+- **Power BI Desktop** — dashboard and DAX measures
+- **Kimball dimensional modelling** — star schema design
 
 ---
 
-## 13. Portfolio Summary
+## Design Decisions Worth Noting
 
-This project demonstrates an end-to-end Business Analytics workflow using SQL Server to transform raw relational grocery transaction data into a validated dimensional warehouse model. The analysis identifies reorder behaviour, basket composition, department performance, and cross-category purchasing patterns that can support product recommendation, retention, and merchandising decisions.
+- **Two-layer warehouse (`raw` + `dw`)** rather than transforming on import. Keeps the source layer auditable and the analytics layer clean.
+- **Transactional ETL with rollback** — the load either fully succeeds or leaves the DW empty. No half-loaded states.
+- **FK constraints dropped during load, recreated after** — avoids per-row FK validation cost on a multi-million-row insert.
+- **Time-of-order attributes on `dim_order`** rather than a separate `dim_time`. Documented as a deliberate simplification trade-off.
+- **Factless fact table** — Instacart provides no price/quantity, so the fact stores presence, not measures.
+- **Dense surrogate key validation** — sanity check that the IDENTITY load is gap-free (useful for a controlled portfolio load; relaxed in production).
 
+---
+
+## What I'd Do Next
+
+- **Recommendations page** — translate findings into specific business actions (bundle pricing, reminder timing, cross-sell rules)
+- **Time dimension** — promote `order_dow` and `order_hour_of_day` into a proper `dim_time`
+- **Incremental load pattern** — current ETL is full-refresh; production would need merge / change-tracking
+- **dbt or SSIS migration** — current ETL is a single SQL file; a real pipeline would split this into orchestrated steps
+- **Predictive layer** — train a reorder-prediction model on the `train` eval set
+
+---
+
+## Author
+
+**\<Your Name\>**
+[LinkedIn](https://linkedin.com/in/your-handle) · [GitHub](https://github.com/your-handle) · \<your-email\>
+
+Open to data analyst / data engineer roles.
