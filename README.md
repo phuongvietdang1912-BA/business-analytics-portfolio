@@ -48,13 +48,13 @@ End-to-end SQL + Power BI analysis of 3.4M Instacart orders (33M order-product r
 
 ## 🛠 Tools & Skills
 
-**Data & Analytics:** SQL, Python (Pandas, NumPy, scikit-learn, TensorFlow), Excel (advanced)
-**BI & Visualisation:** Power BI, DAX, dashboard design, KPI reporting
-**Business Analysis:** Requirements gathering, process mapping, journey mapping, RFM & segmentation analysis
-**ML & AI:** Predictive modelling, time-series forecasting, GRU/LSTM, ensemble methods
-**Data Engineering:** Star schema design, ETL, data warehousing
-**CRM & Tools:** Microsoft Dynamics 365, JIRA, Confluence, Git
-**Methods:** Agile, root cause analysis, stakeholder management
+- **Data & Analytics:** SQL, Python (Pandas, NumPy, scikit-learn, TensorFlow), Excel (advanced)
+- **BI & Visualisation:** Power BI, DAX, dashboard design, KPI reporting
+- **Business Analysis:** Requirements gathering, process mapping, journey mapping, RFM & segmentation analysis
+- **ML & AI:** Predictive modelling, time-series forecasting, GRU/LSTM, ensemble methods
+- **Data Engineering:** Star schema design, ETL, data warehousing
+- **CRM & Tools:** Microsoft Dynamics 365, JIRA, Confluence, Git
+- **Methods:** Agile, root cause analysis, stakeholder management
 
 ---
 
