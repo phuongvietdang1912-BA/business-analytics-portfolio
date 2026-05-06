@@ -2,7 +2,7 @@
 
 Business Analytics professional combining a Master's degree (Deakin University) with 4+ years of CRM and customer-data experience at Microsoft. I translate business problems into analytical solutions using **SQL, Python, and Power BI** — and communicate insights to both technical and non-technical stakeholders.
 
-This repository collects six end-to-end projects, each built around a real business problem and focused on **actionable insight, not just analysis**.
+This repository collects three end-to-end projects, each built around a real business problem and focused on **actionable insight, not just analysis**.
 
 📍 Melbourne, Australia · Open to Business Analyst / Data Analyst roles
 
@@ -10,73 +10,48 @@ This repository collects six end-to-end projects, each built around a real busin
 
 ## 📊 Projects
 
-### 1️⃣ Business Intelligence — Cybersecurity & Phishing Risk Dashb oards
-Role-based Power BI dashboards for HR managers, campaign managers, and employees. Surfaces risk exposure, training effectiveness, and employee response behaviour to support faster, data-driven decisions for security and L&D stakeholders.
+### 1️⃣ Telco — Customer Churn & Retention Analysis
+Analysis of customer churn drivers across a telco subscriber base, combining behavioural and demographic signals to identify revenue at risk and prioritise retention strategy.
 
-**Stack:** Power BI · DAX · SQL
-📁 [`01-business-intelligence`](./01-business-intelligence)
+- Identified **$1.67M annual revenue at risk** concentrated in 5 micro-segments through cohort and segmentation analysis
+- Recommended **5 prioritised retention plays** with projected $35–55K/month impact, framed for executive decision-making
+- Delivered findings via Power BI dashboards designed for non-technical stakeholder review
 
----
-
-### 2️⃣ Descriptive Analytics — Statistical Analysis for Business Performance
-Exploratory and inferential analysis identifying drivers of sales, interaction effects between variables, employee resignation risk, and production trends.
-
-**Stack:** Python · statistical testing · EDA
-📁 [`02-descriptive-analytics`](./02-descriptive-analytics)
+**Stack:** Power BI · Python (Pandas) · DAX
+📁 [`01-Telco-project`](./01-Telco-project)
 
 ---
 
-### 3️⃣ Predictive Analytics — Review Score Prediction with Ensemble Models
-Supervised regression to estimate property review scores using Random Forest, Gradient Boosting, and Voting Ensembles. Includes feature engineering, model comparison, and interpretation.
+### 2️⃣ Instacart — Cross-Sell & Bundle Strategy
+End-to-end SQL + Power BI analysis of 3.4M Instacart orders (33M order-product rows). Built a Kimball star-schema warehouse, validated the load with an automated data-quality harness, and delivered a four-page Power BI report.
 
-**Stack:** Python · scikit-learn · ensemble methods
-📁 [`03-predictive-analytics`](./03-predictive-analytics)
+- Identified **produce + dairy eggs** as the #1 cross-sell pair (1.84M co-purchases) — clear bundle candidate
+- Surfaced **reorder cadence of ~11 days** to inform reorder reminder timing
+- Found **reorder rate climbs from 0% → 85%** by a customer's 5th order — the loyalty inflection point
 
----
-
-### 4️⃣ Machine Learning — Game Rating Optimisation
-Supervised learning to identify the strongest drivers of user ratings, with results translated into product and marketing recommendations.
-
-**Stack:** Python · scikit-learn · feature importance analysis
-📁 [`04-machine-learning`](./04-machine-learning)
+**Stack:** SQL Server · T-SQL · Power BI · DAX · Kimball dimensional modelling
+📁 [`02-InstaCart-SQL-PowerBI`](./02-InstaCart-SQL-PowerBI)
 
 ---
 
-### 5️⃣ Time-Series & AI — Air Quality Forecasting with Deep Learning
-PM2.5 forecasting using GRU and LSTM neural networks. Built to support operational decisions on air-quality alerts and intervention timing.
+### 3️⃣ Air Quality Forecasting with Deep Learning
+24-hour PM2.5 prediction using multivariate time-series data (2013–2017). Benchmarked six RNN architectures against a naive baseline to find the best accuracy/complexity trade-off for operational deployment.
 
-**Stack:** Python · TensorFlow · GRU / LSTM
-📁 [`05-time-series-ai`](./05-time-series-ai)
+- Final model (**GRU-128**) achieved **MAE = 45.33, RMSE = 64.49** on the January 2016 hold-out set
+- **~35-38% error reduction** vs. the naive baseline, with most reliable forecasts in the 0–12h window
+- Designed for real-world operational use — health advisories, traffic management, clinic capacity planning
 
----
-
-### 6️⃣ Decision Modelling — Pricing & Overbooking with Monte Carlo Simulation
-Spreadsheet-based decision model under uncertainty. Optimises pricing and overbooking strategies by simulating revenue outcomes across thousands of demand scenarios.
-
-**Stack:** Excel · Monte Carlo simulation · sensitivity analysis
-📁 [`06-decision-modelling`](./06-decision-modelling)
-
----
-
-## ⭐ Featured Project
-
-### Instacart — Cross-Sell & Bundle Strategy
-End-to-end SQL + Power BI analysis of 3.4M Instacart orders. Built a Kimball star-schema warehouse, validated the load with an automated data-quality harness, and delivered a four-page Power BI report identifying:
-
-- **Produce + dairy eggs** as the #1 cross-sell pair (1.84M co-purchases) → bundle candidate
-- **Reorder cadence** of ~11 days → reorder reminder timing
-- **Reorder rate climbs from 0% → 85%** by order #5 → loyalty inflection point
-
-📁 [`instacart-business-analytics`](./instacart-business-analytics)
+**Stack:** Python · TensorFlow / Keras · GRU / LSTM · scikit-learn
+📁 [`03-AirQuality-Py`](./03-AirQuality-Py)
 
 ---
 
 ## 🛠 Tools & Skills
 
-**Data & Analytics:** SQL, Python (Pandas, NumPy, scikit-learn, TensorFlow), Excel (advanced, Monte Carlo)
-**BI & Visualisation:** Power BI, Tableau, DAX, dashboard design, KPI reporting
+**Data & Analytics:** SQL, Python (Pandas, NumPy, scikit-learn, TensorFlow), Excel (advanced)
+**BI & Visualisation:** Power BI, DAX, dashboard design, KPI reporting
 **Business Analysis:** Requirements gathering, process mapping, journey mapping, RFM & segmentation analysis
-**ML & AI:** Ensemble methods, GRU/LSTM, predictive modelling, time-series forecasting
+**ML & AI:** Predictive modelling, time-series forecasting, GRU/LSTM, ensemble methods
 **Data Engineering:** Star schema design, ETL, data warehousing
 **CRM & Tools:** Microsoft Dynamics 365, JIRA, Confluence, Git
 **Methods:** Agile, root cause analysis, stakeholder management
