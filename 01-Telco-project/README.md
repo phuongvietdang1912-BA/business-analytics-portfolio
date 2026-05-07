@@ -268,8 +268,6 @@ Reduce overall churn from **26.54% → <20%** within 12 months and recover **$35
 | **Power BI Desktop** | Data modelling, DAX, dashboard build |
 | **DAX** | All KPI measures and segment calculations |
 | **Power Query (M)** | Data cleaning, type conversion, calculated columns |
-| **Python (pandas)** | Initial exploratory data analysis |
-| **SQL** | Source query and validation checks |
 | **Microsoft Word** | Long-form business analytics report |
 | **GitHub** | Project documentation and version control |
 
@@ -277,10 +275,7 @@ Reduce overall churn from **26.54% → <20%** within 12 months and recover **$35
 
 ## 9. Links
 
-- 📊 **Live Power BI Dashboard:** [View on Power BI Service](#) <!-- replace with your published link -->
-- 📁 **GitHub Repository:** [github.com/your-username/telco-churn-analysis](#) <!-- replace -->
-- 🐍 **Python EDA Notebook:** [`/notebooks/eda.ipynb`](#) <!-- replace -->
-- 🗃️ **SQL Validation Queries:** [`/sql/validation.sql`](#) <!-- replace -->
+- 📁 **GitHub Repository:** [github.com/your-username/telco-churn-analysis](#)
 - 📄 **Full Business Analytics Report (PDF/DOCX):** [`/reports/Telco_Churn_Analytics_Report.docx`](#) <!-- replace -->
 - 📂 **Dataset:** [Kaggle — IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
 
