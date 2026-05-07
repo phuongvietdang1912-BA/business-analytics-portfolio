@@ -177,21 +177,24 @@ The Power BI report is structured as a **three-page narrative**, with four globa
 ### 📄 Page 1 — Executive Overview
 > **Audience:** Leadership · **Question answered:** *Where do we stand and where is the bleeding worst?*
 
-<img width="1307" height="731" alt="image" src="https://github.com/user-attachments/assets/0939d3ec-a0f1-433e-95a7-5eeff1c58844" />
+<img width="1306" height="730" alt="image" src="https://github.com/user-attachments/assets/dd79748b-be97-4f54-80dc-3c02803fbde6" />
+
 
 
 
 ### 📄 Page 2 — Customer Segmentation Deep Dive
 > **Audience:** Marketing & CX · **Question answered:** *Who is leaving and why?*
 
-<img width="1302" height="732" alt="image" src="https://github.com/user-attachments/assets/3e0afd8a-7a27-4b57-a662-b367a2d60553" />
+<img width="1305" height="723" alt="image" src="https://github.com/user-attachments/assets/691b5cd3-c8fc-44d9-ac8b-d4e620622635" />
+
 
 
 
 ### 📄 Page 3 — Churn Drivers & Revenue Risk
 > **Audience:** Product & Finance · **Question answered:** *Where is the financial exposure concentrated?*
 
-<img width="1322" height="745" alt="image" src="https://github.com/user-attachments/assets/728072d9-d3b5-4828-b135-26ef802f5623" />
+<img width="1325" height="747" alt="image" src="https://github.com/user-attachments/assets/8c3b56d0-be1d-4baa-b848-5e826dd48ce5" />
+
 
 
 
