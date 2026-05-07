@@ -276,7 +276,7 @@ Reduce overall churn from **26.54% → <20%** within 12 months and recover **$35
 ## 9. Links
 
 - 📁 **GitHub Repository:** [github.com/your-username/telco-churn-analysis](#)
-- 📄 **Full Business Analytics Report (PDF/DOCX):** [`/reports/Telco_Churn_Analytics_Report.docx`](#) <!-- replace -->
+- 📄 **Full Business Analytics Report (PDF/DOCX):** [https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/raw/refs/heads/main/01-Telco-project/Telco%20Churn%20PowerBI.docx](#) <!-- replace -->
 - 📂 **Dataset:** [Kaggle — IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
 
 ---
