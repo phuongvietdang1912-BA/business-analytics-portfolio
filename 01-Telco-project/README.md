@@ -177,19 +177,22 @@ The Power BI report is structured as a **three-page narrative**, with four globa
 ### 📄 Page 1 — Executive Overview
 > **Audience:** Leadership · **Question answered:** *Where do we stand and where is the bleeding worst?*
 
-<img width="1313" height="735" alt="01_Executive_Summary_Telco" src="https://github.com/user-attachments/assets/01c304f3-fd5f-4c91-8032-986aa0bc73b4" />
+<img width="1307" height="731" alt="image" src="https://github.com/user-attachments/assets/0939d3ec-a0f1-433e-95a7-5eeff1c58844" />
+
 
 
 ### 📄 Page 2 — Customer Segmentation Deep Dive
 > **Audience:** Marketing & CX · **Question answered:** *Who is leaving and why?*
 
-<img width="1308" height="736" alt="02_Customer_Segmentation_Deepdive_Telco" src="https://github.com/user-attachments/assets/8e638218-5a0a-4059-81c9-64593f80de3f" />
+<img width="1302" height="732" alt="image" src="https://github.com/user-attachments/assets/3e0afd8a-7a27-4b57-a662-b367a2d60553" />
+
 
 
 ### 📄 Page 3 — Churn Drivers & Revenue Risk
 > **Audience:** Product & Finance · **Question answered:** *Where is the financial exposure concentrated?*
 
-<img width="1326" height="740" alt="03_Churn_Drivers_Telco" src="https://github.com/user-attachments/assets/bf4f4ed7-e178-4faa-8973-18e5dbbeba8f" />
+<img width="1322" height="745" alt="image" src="https://github.com/user-attachments/assets/728072d9-d3b5-4828-b135-26ef802f5623" />
+
 
 
 ---
