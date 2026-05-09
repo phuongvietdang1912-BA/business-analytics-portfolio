@@ -261,4 +261,3 @@ The Roadmap items below directly target the failure modes identified in [§7](#7
 
 Open to **Data Analyst, Business Analyst, and ML Engineer** roles.
 
-⭐ *If you found this project useful — particularly the honest framing in §7 and §8 — give it a star!*
