@@ -10,20 +10,22 @@
 
 ## 📑 Table of Contents
 1. [Business Problem](#1-business-problem)
-2. [Dataset Overview](#2-dataset-overview)
-3. [Data Cleaning & Modelling](#3-data-cleaning--modelling)
-4. [Key Metrics / KPIs](#4-key-metrics--kpis)
-5. [Dashboard / Analysis](#5-dashboard--analysis)
-6. [Key Insights](#6-key-insights)
-7. [Business Recommendations](#7-business-recommendations)
-8. [Tools Used](#8-tools-used)
-9. [Links](#9-links)
+2. [Headline Finding](#2-headline-finding)
+3. [Dataset Overview](#3-dataset-overview)
+4. [Data Cleaning & Modelling](#4-data-cleaning--modelling)
+5. [Key Metrics / KPIs](#5-key-metrics--kpis)
+6. [Dashboard / Analysis](#6-dashboard--analysis)
+7. [Key Insights](#7-key-insights)
+8. [Business Recommendations](#8-business-recommendations)
+9. [Limitations](#9-limitations)
+10. [Tools Used](#10-tools-used)
+11. [Links](#11-links)
 
 ---
 
 ## 1. Business Problem
 
-A telecom provider is losing **roughly 1 in 4 customers (26.54%)** — well above typical industry churn benchmarks of 15–25%. With **$139.13K in monthly recurring revenue at risk (~$1.67M annualised)**, leadership lacks a clear, segment-level view of:
+A telecom provider is losing **roughly 1 in 4 customers (26.54%)** — well above typical industry benchmarks of 15–25%. With **$139.13K in monthly recurring revenue at risk (~$1.67M annualised)**, leadership lacks a clear, segment-level view of:
 
 - 🔍 **Where** churn is concentrated (which customer profiles are leaving?)
 - 💰 **How much** each segment is costing the business
@@ -33,7 +35,24 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** — well abov
 
 ---
 
-## 2. Dataset Overview
+## 2. Headline Finding
+
+> **75% of revenue at risk sits in just 5 customer micro-segments — accounting for 71% of all churned customers.**
+
+| Risk Segment | Churn % | Churned | Revenue at Risk (p/m) |
+|---|---:|---:|---:|
+| 0–6 mo · MTM · Fiber optic | **74.15%** 🔴 | 459 | **$37,150** |
+| 25–48 mo · MTM · Fiber optic | 43.38% | 226 | $20,762 |
+| 13–24 mo · MTM · Fiber optic | 50.59% | 215 | $19,047 |
+| 7–12 mo · MTM · Fiber optic | 61.95% | 184 | $16,028 |
+| 0–6 mo · MTM · DSL | 49.49% | 245 | $10,999 |
+| **Total (Top 5)** | **56.39%** | **1,329** | **$103,987** |
+
+**Implication:** A surgical retention strategy targeting these five segments — rather than a broad-based programme — captures three quarters of the financial exposure with a fraction of the operational cost.
+
+---
+
+## 3. Dataset Overview
 
 **Source:** [IBM Telco Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) — a widely-used public benchmark dataset.
 
@@ -55,7 +74,7 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** — well abov
 
 ---
 
-## 3. Data Cleaning & Modelling
+## 4. Data Cleaning & Modelling
 
 ### 🧹 Cleaning Steps
 
@@ -92,6 +111,7 @@ SWITCH(
     "$90+"
 )
 
+-- Risk Segment (composite identifier)
 Risk Segment Short =
 Telco[Tenure Band] & " | " &
 IF(
@@ -101,6 +121,7 @@ IF(
 ) & " | " &
 Telco[InternetService]
 
+-- Online Security (cleaned)
 OnlineSecurity Clean =
 SWITCH(
     Telco[OnlineSecurity],
@@ -108,7 +129,8 @@ SWITCH(
     Telco[OnlineSecurity]
 )
 
---TechSupport Clean =
+-- Tech Support (cleaned)
+TechSupport Clean =
 SWITCH(
     Telco[TechSupport],
     "No internet service", "No internet",
@@ -117,44 +139,39 @@ SWITCH(
 ```
 
 ### 📐 Data Model
-Single fact table model — no star schema needed for a snapshot dataset of this size. Sort-by columns applied to `Tenure Band` and `Monthly Charge Band` for natural ordering on visuals.
+A single fact-table model is used here as a **deliberate design choice** — for a 7K-row point-in-time snapshot with no temporal or transactional grain, a star schema would add modelling overhead without analytical benefit. (For a Kimball star-schema implementation, see [Project 2 — Instacart](../02-InstaCart-SQL-PowerBI).) Sort-by columns are applied to `Tenure Band` and `Monthly Charge Band` for natural ordering on visuals.
 
 ---
 
-## 4. Key Metrics / KPIs
+## 5. Key Metrics / KPIs
 
 Eight core DAX measures power the entire report:
 
 ```dax
 Total Customers = DISTINCTCOUNT(Telco[customerID])
 
-Churned Customers = CALCULATE([Total Customers],Telco[Churn] = "Yes")
+Churned Customers = CALCULATE([Total Customers], Telco[Churn] = "Yes")
 
-Active Customers = CALCULATE( [Total Customers], Telco[Churn] = "No")
+Active Customers = CALCULATE([Total Customers], Telco[Churn] = "No")
 
-Churn Rate % = DIVIDE( [Churned Customers], [Total Customers])
+Churn Rate % = DIVIDE([Churned Customers], [Total Customers])
 
-Monthly Recurring Revenue = CALCULATE( SUM( Telco[MonthlyCharges] ), Telco[Churn] = "No" )
+Monthly Recurring Revenue =
+CALCULATE(SUM(Telco[MonthlyCharges]), Telco[Churn] = "No")
 
 Revenue at Risk (p/m) =
-CALCULATE(
-    SUM(Telco[MonthlyCharges]),
-    Telco[Churn] = "Yes"
-)
+CALCULATE(SUM(Telco[MonthlyCharges]), Telco[Churn] = "Yes")
 
-Annualised Revenue at Risk =
-[Revenue at Risk (p/m)] * 12
+Annualised Revenue at Risk = [Revenue at Risk (p/m)] * 12
 
 Avg Monthly Charge of Churned Customers =
-CALCULATE(
-    AVERAGE(Telco[MonthlyCharges]),
-    Telco[Churn] = "Yes")
+CALCULATE(AVERAGE(Telco[MonthlyCharges]), Telco[Churn] = "Yes")
 
 Churn Rate by Segment =
-    DIVIDE(
-        CALCULATE( [Churned Customers], ALLSELECTED( Telco ) ),
-        CALCULATE( [Total Customers],   ALLSELECTED( Telco ) )
-    )
+DIVIDE(
+    CALCULATE([Churned Customers], ALLSELECTED(Telco)),
+    CALCULATE([Total Customers],   ALLSELECTED(Telco))
+)
 ```
 
 ### 📊 Headline Numbers
@@ -170,40 +187,31 @@ Churn Rate by Segment =
 
 ---
 
-## 5. Dashboard / Analysis
+## 6. Dashboard / Analysis
 
 The Power BI report is structured as a **three-page narrative**, with four global slicers (Contract, Internet Service, Payment Method, Tenure Band).
 
 ### 📄 Page 1 — Executive Overview
 > **Audience:** Leadership · **Question answered:** *Where do we stand and where is the bleeding worst?*
 
-<img width="1306" height="730" alt="image" src="https://github.com/user-attachments/assets/dd79748b-be97-4f54-80dc-3c02803fbde6" />
-
-
-
+<img width="1306" height="730" alt="Executive Overview" src="https://github.com/user-attachments/assets/dd79748b-be97-4f54-80dc-3c02803fbde6" />
 
 ### 📄 Page 2 — Customer Segmentation Deep Dive
 > **Audience:** Marketing & CX · **Question answered:** *Who is leaving and why?*
 
-<img width="1305" height="723" alt="image" src="https://github.com/user-attachments/assets/691b5cd3-c8fc-44d9-ac8b-d4e620622635" />
-
-
-
+<img width="1305" height="723" alt="Customer Segmentation" src="https://github.com/user-attachments/assets/691b5cd3-c8fc-44d9-ac8b-d4e620622635" />
 
 ### 📄 Page 3 — Churn Drivers & Revenue Risk
 > **Audience:** Product & Finance · **Question answered:** *Where is the financial exposure concentrated?*
 
-<img width="1325" height="747" alt="image" src="https://github.com/user-attachments/assets/8c3b56d0-be1d-4baa-b848-5e826dd48ce5" />
-
-
-
+<img width="1325" height="747" alt="Churn Drivers and Revenue Risk" src="https://github.com/user-attachments/assets/8c3b56d0-be1d-4baa-b848-5e826dd48ce5" />
 
 ---
 
-## 6. Key Insights
+## 7. Key Insights
 
-### 🔎 1. Tenure is the strongest single predictor of churn
-Customers in their first 6 months churn at **52.94%** — nearly **8× the rate** of customers past 5 years (6.61%). The relationship is monotonic — every extra tenure bracket reduces churn.
+### 🔎 1. Tenure shows the steepest single-variable churn gradient
+Customers in their first 6 months churn at **52.94%** vs **6.61%** at 5+ years — a **46-percentage-point absolute gap**. The relationship is monotonic: every additional tenure bracket reduces churn.
 
 | Tenure Band | Churn Rate | Revenue at Risk |
 |---|---:|---:|
@@ -214,14 +222,16 @@ Customers in their first 6 months churn at **52.94%** — nearly **8× the rate*
 | 49–60 months | 14.42% | $11K |
 | 60+ months | **6.61%** 🟢 | $9K |
 
-### 🔎 2. Contract type compounds the risk
-Month-to-month customers churn at **42.71%** — roughly **15×** the rate of two-year contracts (2.83%).
+### 🔎 2. Contract type rivals tenure as a churn driver
+Month-to-month customers churn at **42.71%** vs **2.83%** for two-year contracts — a **40-point absolute gap**, comparable in magnitude to the tenure effect. Tenure and contract type together explain most of the churn variance and likely interact (short-tenure customers are also far more likely to be MTM).
 
 ### 🔎 3. Payment friction is a hidden killer
-Electronic check users churn at **45.29%** — nearly **3×** the autopay rate. Each billing cycle is effectively a re-purchase decision.
+Electronic-check users churn at **45.29%** vs **~16%** for autopay methods — a 29-point gap. Each billing cycle is effectively a re-purchase decision when payment isn't automated.
 
-### 🔎 4. Fiber optic churns *more* than DSL — counterintuitive but explainable
-Fiber optic = **41.89%** churn vs DSL = **18.96%**. Drilling deeper resolves it: fiber customers without online security churn at **49.36%** vs **21.81%** with it. The product is sold without the supporting service bundle.
+### 🔎 4. Fiber optic churns more than DSL — worth investigating, not assuming
+Fiber optic = **41.89%** churn vs DSL = **18.96%**. A natural hypothesis is that fiber customers without bundled online security are under-served: those without it churn at **49.36%** vs **21.81%** with it.
+
+> ⚠️ **Caveat:** This relationship is likely confounded with contract type, tenure, and monthly charges (fiber skews short-tenure / high-charge / MTM). Recommended next step is an **A/B test** of the security bundle on new fiber customers, controlling for contract and tenure, before assuming bundling causes retention.
 
 ### 🔎 5. Demographic vulnerability cohorts
 | Group | Churn |
@@ -230,38 +240,42 @@ Fiber optic = **41.89%** churn vs DSL = **18.96%**. Drilling deeper resolves it:
 | No partner | 32.96% (vs 19.66%) |
 | No dependents | 31.28% (vs 15.45%) |
 
-### 🔎 6. Risk is highly concentrated — the case for surgical retention
-**Top 5 micro-segments = $103,987/month = ~75% of all revenue at risk.**
-
-| Risk Segment | Churn % | Churned | Revenue at Risk |
-|---|---:|---:|---:|
-| 0–6 mo · MTM · Fiber optic | **74.15%** 🔴 | 459 | **$37,150** |
-| 25–48 mo · MTM · Fiber optic | 43.38% | 226 | $20,762 |
-| 13–24 mo · MTM · Fiber optic | 50.59% | 215 | $19,047 |
-| 7–12 mo · MTM · Fiber optic | 61.95% | 184 | $16,028 |
-| 0–6 mo · MTM · DSL | 49.49% | 245 | $10,999 |
-| **Total (Top 5)** | **56.39%** | **1,329** | **$103,987** |
+Demographics aren't directly actionable as a campaign target, but should be incorporated as **risk flags** in any predictive churn model (see Roadmap).
 
 ---
 
-## 7. Business Recommendations
+## 8. Business Recommendations
 
-Five prioritised plays, sequenced by impact-vs-effort:
+Four prioritised plays, sequenced by impact-vs-effort:
 
 | # | Recommendation | Target Segment | Est. Impact (p/m) | Priority |
 |---|---|---|---:|:---:|
 | **R1** | 90-day onboarding programme (touchpoints at days 7/30/60/90) | All 0–6 mo customers | $15–20K | 🔴 Highest |
 | **R2** | Contract migration incentive (free month to convert MTM → 12-mo) | MTM customers past 6 mo | $10–15K | 🔴 High |
 | **R3** | Migrate electronic-check payers to autopay (one-time bill credit) | All ~2.4K e-check users | $10–15K | 🔴 High |
-| **R4** | Bundle online security + tech support into fiber plans | All ~3.1K fiber customers | $20–35K | 🟠 Med-High |
-| **R5** | Senior & single-household engagement programme | Seniors / no partner / no dependents | Smaller, longer-term | 🟡 Medium |
+| **R4** | A/B test: bundle online security + tech support into fiber plans | New fiber customers (test cohort) | $20–35K | 🟠 Med-High |
+
+> **📐 Impact estimation methodology:** Each estimate assumes a target reduction in segment churn (typically 20–35% relative) applied to current revenue at risk in the affected segment. Ranges reflect conservative-to-optimistic outcomes pending real-world A/B validation. Estimates are **directional**, not commitments — they exist to prioritise effort, not to forecast P&L.
 
 ### 🎯 Combined Target
 Reduce overall churn from **26.54% → <20%** within 12 months and recover **$35–55K/month** in revenue at risk within two quarters.
 
 ---
 
-## 8. Tools Used
+## 9. Limitations
+
+A few constraints to keep in mind when interpreting these findings:
+
+- **Point-in-time snapshot.** No time dimension means we can't validate whether observed patterns are stable, seasonal, or trending — and we can't measure intervention impact over time without follow-up data.
+- **No cost-of-acquisition data.** Revenue-at-risk numbers are gross, not net of CAC, so true Customer Lifetime Value impact can't be modelled here.
+- **Benchmark dataset.** The IBM Telco dataset is a public learning benchmark; real-world telco churn drivers may differ in magnitude and may include drivers not captured here (network quality, customer service contacts, competitor pricing).
+- **Single-variable analysis.** Insights are based on segmented descriptive statistics, not a multivariate model. The "Strongest predictor" question is left to the predictive modelling phase (see Roadmap).
+
+**With richer data, the next questions I'd ask are:** customer-service contact history, NPS / CSAT trajectories, network outage exposure by customer, and competitor switching events. These typically explain the residual variance that demographics and account features can't.
+
+---
+
+## 10. Tools Used
 
 | Tool | Purpose |
 |---|---|
@@ -273,10 +287,10 @@ Reduce overall churn from **26.54% → <20%** within 12 months and recover **$35
 
 ---
 
-## 9. Links
+## 11. Links
 
-- 📁 **GitHub Repository:** [github.com/your-username/telco-churn-analysis](#)
-- 📄 **Full Business Analytics Report (PDF/DOCX):** [View Report](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/blob/main/01-Telco-project/Telco%20Churn%20Report.pdf)
+- 📁 **Project Folder:** [`01-Telco-project`](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/tree/main/01-Telco-project)
+- 📄 **Full Business Analytics Report (PDF):** [View Report](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/blob/main/01-Telco-project/Telco%20Churn%20Report.pdf)
 - 📂 **Dataset:** [Kaggle — IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
 
 ---
@@ -284,7 +298,7 @@ Reduce overall churn from **26.54% → <20%** within 12 months and recover **$35
 ## 📌 Project Structure
 
 ```
-telco-churn-analysis/
+01-Telco-project/
 ├── data/
 │   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
 ├── notebooks/
@@ -306,18 +320,17 @@ telco-churn-analysis/
 
 ## 🚀 Next Steps (Roadmap)
 
-- [ ] Build a **predictive churn model** (logistic regression / XGBoost) for customer-level scoring
+- [ ] Build a **predictive churn model** (logistic regression / XGBoost) for customer-level scoring, with feature importance to formally rank churn drivers
 - [ ] Add **Customer Lifetime Value (CLV)** modelling to pair with churn probability
-- [ ] Set up an **A/B testing framework** to validate retention plays before scale-up
+- [ ] Set up an **A/B testing framework** to validate retention plays before scale-up — starting with the fiber + online-security bundle (R4)
 - [ ] Connect to a live data source for **automated refresh**
 
 ---
 
 ## 👤 Author
 
-**[Your Name]**
-📧 your.email@example.com
-🔗 [LinkedIn](#) · [Portfolio](#) · [GitHub](#)
+**Phuong Viet Dang**
+📧 phuong.vietdang1912@gmail.com
+🔗 [LinkedIn](https://www.linkedin.com/in/phuongviet1912/) · [Portfolio](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio)
 
 ⭐ *If you found this project useful, give it a star!*
-
