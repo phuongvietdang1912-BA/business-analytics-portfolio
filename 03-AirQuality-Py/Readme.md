@@ -1,6 +1,6 @@
-# 🌫️ Air Quality Forecasting — 24-Hour PM2.5 Prediction with Deep Learning
+# 🌫️ Air Quality Forecasting -  24-Hour PM2.5 Prediction with Deep Learning
 
-> **End-to-end time-series forecasting project predicting hourly PM2.5 concentrations 24 hours ahead, using multivariate meteorological and pollutant data from 2013–2017. Six RNN architectures benchmarked against a naive baseline, with explicit analysis of when the model can — and cannot — be trusted.**
+> **End-to-end time-series forecasting project predicting hourly PM2.5 concentrations 24 hours ahead, using multivariate meteorological and pollutant data from 2013–2017. Six RNN architectures benchmarked against a naive baseline, with explicit analysis of when the model can -  and cannot -  be trusted.**
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white)
@@ -17,7 +17,7 @@
 5. [Results](#5-results)
 6. [Horizon-Wise Performance](#6-horizon-wise-performance)
 7. [Model Behaviour & Failure Modes](#7-model-behaviour--failure-modes)
-8. [Business Impact — Honest Framing](#8-business-impact--honest-framing)
+8. [Business Impact -  Honest Framing](#8-business-impact--honest-framing)
 9. [Deployment Considerations](#9-deployment-considerations)
 10. [Limitations](#10-limitations)
 11. [Tech Stack](#11-tech-stack)
@@ -50,9 +50,9 @@ Hourly multivariate series spanning March 2013 to February 2017. Features includ
 
 ### 🔧 Feature Engineering
 Cyclic time encodings (`sin`/`cos` of hour-of-day and day-of-week) added so the network doesn't have to learn that hour 23 and hour 0 are adjacent. Exploratory analysis confirmed:
-- **Heavy right-tail target distribution** — p50 ≈ 60, p95 ≈ 247, p99 ≈ 378 µg/m³ (extreme peak episodes are rare but high-magnitude)
-- **Diurnal pattern** — average PM2.5 elevated at morning and evening rush hours
-- **Pollutant correlations** — PM2.5 strongly correlated with PM10, CO, NO2; weak/inverse with wind speed
+- **Heavy right-tail target distribution** -  p50 ≈ 60, p95 ≈ 247, p99 ≈ 378 µg/m³ (extreme peak episodes are rare but high-magnitude)
+- **Diurnal pattern** -  average PM2.5 elevated at morning and evening rush hours
+- **Pollutant correlations** -  PM2.5 strongly correlated with PM10, CO, NO2; weak/inverse with wind speed
 
 ### 📦 Sequence Generation
 Each training sample uses a **21-day lookback window (504 hours)** to predict the **next 24 hours** as a direct multi-step output. This captures multi-day pollution build-up and decay episodes.
@@ -62,7 +62,7 @@ Each training sample uses a **21-day lookback window (504 hours)** to predict th
 - **Validation:** last 10% of training period (contiguous, time-ordered)
 - **Test:** January 2016 (strict hold-out)
 
-When forming test windows, the last 504 training hours are prepended so the first January-1 forecast has enough past context — using past data only, no leakage. **Final window counts:** Train = 8,286 · Val = 452 · Test = 265.
+When forming test windows, the last 504 training hours are prepended so the first January-1 forecast has enough past context -  using past data only, no leakage. **Final window counts:** Train = 8,286 · Val = 452 · Test = 265.
 
 > **⚠️ Test set caveat:** 265 forecast windows is small. Differences of less than ~1 MAE between models may not be statistically significant.
 
@@ -93,7 +93,7 @@ Six variants trained under identical conditions for an apples-to-apples comparis
 | 2 | StackedLSTM 128→64 | Deeper temporal hierarchy (short cycles + longer regimes) |
 | 3 | GRU-128 (efficient alt.) | GRUs simpler than LSTMs, often generalise better at similar capacity |
 | 4 | LSTM-128 + Dropout(0.1) | Light regularisation when train < val loss suggests overfit |
-| 5 | LSTM-128 (MSE loss) | Penalise large errors more — does it help peak prediction? |
+| 5 | LSTM-128 (MSE loss) | Penalise large errors more -  does it help peak prediction? |
 | 6 | GRU-128 (no dropout) | Test whether dropout is restoring or restricting amplitude |
 
 ---
@@ -108,15 +108,15 @@ Six variants trained under identical conditions for an apples-to-apples comparis
 | 4 | LSTM-128 + Dropout(0.1) | MAE | 46.62 | 66.26 |
 | 5 | LSTM-128 (capacity) | MAE | 49.42 | 68.44 |
 | 6 | LSTM-128 (MSE for peaks) | MSE | 53.85 | 70.19 |
-| — | Naive (repeat-last) | — | 69.75 | 98.52 |
+| -  | Naive (repeat-last) | -  | 69.75 | 98.52 |
 
 ### What the results tell us
 - **GRU family wins.** Two GRU variants take the top two MAE positions; the GRU's simpler gating generalises better than LSTM at the same capacity, with fewer parameters.
 - **MSE loss hurt accuracy.** It was meant to push peaks higher; in practice it widened average error without convincing peak gains.
-- **Dropout effect was mixed.** Light regularisation didn't materially improve generalisation here — train and val losses tracked closely without it.
+- **Dropout effect was mixed.** Light regularisation didn't materially improve generalisation here -  train and val losses tracked closely without it.
 - **StackedLSTM was competitive but more expensive.** Marginally behind on MAE, slightly ahead on RMSE; not enough lift to justify the added complexity for this problem size.
 
-> **Note on baseline strength:** The repeat-last naive baseline is a *weak* benchmark — it ignores the diurnal cycle and pollutant context entirely. A stronger baseline (seasonal naive, or a 7-day same-hour average) would close the gap to the GRU substantially. Beating naive by 35% is a real but modest result; see [Roadmap](#13-what-id-do-next).
+> **Note on baseline strength:** The repeat-last naive baseline is a *weak* benchmark -  it ignores the diurnal cycle and pollutant context entirely. A stronger baseline (seasonal naive, or a 7-day same-hour average) would close the gap to the GRU substantially. Beating naive by 35% is a real but modest result; see [Roadmap](#13-what-id-do-next).
 
 ---
 
@@ -134,7 +134,7 @@ Errors increase with lead time, as expected for direct multi-step forecasting:
 **Operational implication:**
 - **0–6 h forecasts** are the most reliable and the best foundation for any operational use case.
 - **6–12 h** are useful but should be communicated with growing uncertainty.
-- **18–24 h** forecasts should carry explicit uncertainty bands (or be replaced with a probabilistic model — see Roadmap).
+- **18–24 h** forecasts should carry explicit uncertainty bands (or be replaced with a probabilistic model -  see Roadmap).
 
 ---
 
@@ -144,32 +144,32 @@ Errors increase with lead time, as expected for direct multi-step forecasting:
 
 Inspecting the test-set predictions on consecutive days in January 2016 reveals a **regression-to-the-mean** failure mode:
 
-### 🔴 Failure mode 1 — Under-calls extreme peak days
-On Jan 1, actual PM2.5 ranges from 100–340 µg/m³ (a high-pollution episode). The model predicts a roughly flat 30–95 µg/m³ — it correctly identifies "elevated" but **massively under-states** the magnitude. On a real "Unhealthy" day, the model would communicate "Moderate" levels.
+### 🔴 Failure mode 1 -  Under-calls extreme peak days
+On Jan 1, actual PM2.5 ranges from 100–340 µg/m³ (a high-pollution episode). The model predicts a roughly flat 30–95 µg/m³ -  it correctly identifies "elevated" but **massively under-states** the magnitude. On a real "Unhealthy" day, the model would communicate "Moderate" levels.
 
-### 🔴 Failure mode 2 — Over-calls clean days
-On Jan 2, actual PM2.5 sits at 5–20 µg/m³ (a clean day). The model predicts 50–325 µg/m³ — completely wrong direction. On a clean day, the model would falsely trigger advisories.
+### 🔴 Failure mode 2 -  Over-calls clean days
+On Jan 2, actual PM2.5 sits at 5–20 µg/m³ (a clean day). The model predicts 50–325 µg/m³ -  completely wrong direction. On a clean day, the model would falsely trigger advisories.
 
 ### Why this happens
 The training distribution is dominated by mid-range readings, with extreme-high and extreme-low days under-represented. MAE loss further encourages the model to predict toward the conditional mean; trading peak fidelity for average accuracy is the optimal MAE strategy when peaks are rare.
 
 ### What this means for deployment
-The model's headline MAE of ~46 µg/m³ is misleading without this context. The model is currently best understood as a **directional smoother** — useful for "is air quality trending up or down over the next 6 hours?" — not as a quantitative predictor on the days where the prediction matters most.
+The model's headline MAE of ~46 µg/m³ is misleading without this context. The model is currently best understood as a **directional smoother** -  useful for "is air quality trending up or down over the next 6 hours?" -  not as a quantitative predictor on the days where the prediction matters most.
 
-> **🚧 This is the single most important finding of the project, and it directly motivates the Roadmap items below — quantile forecasts to capture uncertainty on peaks, peak-aware loss functions, and ensemble approaches that don't optimise toward the mean.**
+> **🚧 This is the single most important finding of the project, and it directly motivates the Roadmap items below -  quantile forecasts to capture uncertainty on peaks, peak-aware loss functions, and ensemble approaches that don't optimise toward the mean.**
 
 ---
 
-## 8. Business Impact — Honest Framing
+## 8. Business Impact -  Honest Framing
 
 ### ✅ Where this model adds value today
-- **Directional 0–6 hour advisories** — "is air quality likely to worsen or improve in the next 6 hours?"
-- **Baseline for further model development** — clean pipeline, reproducible benchmark, validated splits
-- **Trend awareness for non-operational uses** — research, education, public dashboards with uncertainty disclaimers
+- **Directional 0–6 hour advisories** -  "is air quality likely to worsen or improve in the next 6 hours?"
+- **Baseline for further model development** -  clean pipeline, reproducible benchmark, validated splits
+- **Trend awareness for non-operational uses** -  research, education, public dashboards with uncertainty disclaimers
 
 ### ⛔ Where this model should *not* be deployed yet
-- **Hospital staffing or clinic capacity decisions** — the under-prediction on peak days makes the model worse than useful for staff scheduling tied to pollution events
-- **Hard threshold alerts** ("Unhealthy" / "Hazardous" categories) — the regression-to-mean behaviour will systematically miss the events the alert is designed to catch
+- **Hospital staffing or clinic capacity decisions** -  the under-prediction on peak days makes the model worse than useful for staff scheduling tied to pollution events
+- **Hard threshold alerts** ("Unhealthy" / "Hazardous" categories) -  the regression-to-mean behaviour will systematically miss the events the alert is designed to catch
 - **Insurance, planning, or compliance use cases** requiring calibrated probabilities
 
 ### 📣 Communication strategy
@@ -178,7 +178,7 @@ Any operational use should:
 2. Include a **"recent observed peak"** reference so users can spot under-prediction
 3. Be paired with a **rule-based fallback** ("if last 3 hours > X, override forecast")
 
-This is the kind of operational caveat that a production deployment would absolutely require — it's not a weakness of the project; it's the thing the project surfaced clearly enough to act on.
+This is the kind of operational caveat that a production deployment would absolutely require -  it's not a weakness of the project; it's the thing the project surfaced clearly enough to act on.
 
 ---
 
@@ -199,7 +199,7 @@ This is the kind of operational caveat that a production deployment would absolu
 - **Single test month (Jan 2016, 265 windows).** Differences smaller than ~1 MAE between models may not be statistically significant. Cross-validated rolling-origin evaluation across multiple months would be more robust.
 - **Single station.** No spatial signal sharing; performance may differ at locations with different emission profiles or weather regimes.
 - **Weak baseline comparison.** Repeat-last is the lowest-effort baseline. Seasonal naive (24h lag) or a 7-day same-hour mean would be more honest comparisons and would likely close the gap to the GRU substantially.
-- **Point estimates, no uncertainty.** No quantile forecasts or confidence intervals — operationally critical when the underlying process has heavy tails.
+- **Point estimates, no uncertainty.** No quantile forecasts or confidence intervals -  operationally critical when the underlying process has heavy tails.
 - **Regression to the mean on extremes.** See [§7](#7-model-behaviour--failure-modes). The model systematically under-predicts peaks and over-predicts troughs.
 - **Static feature set.** No real-time external signals (traffic data, fire/dust events, regional transport) that often drive the events the model misses.
 
@@ -243,13 +243,13 @@ pip install numpy pandas matplotlib scikit-learn tensorflow
 
 The Roadmap items below directly target the failure modes identified in [§7](#7-model-behaviour--failure-modes):
 
-- [ ] **Quantile / probabilistic forecasts** — communicate uncertainty bands instead of point estimates; particularly important for peak days where the point estimate is most wrong
-- [ ] **Peak-aware loss function** — weighted MAE or asymmetric loss that penalises under-prediction on high-pollution episodes more than over-prediction on clean days
-- [ ] **Stronger baselines** — replace repeat-last with seasonal naive (24h lag) and 7-day same-hour mean; report all three for honest comparison
-- [ ] **Multi-station modelling** — share signal across nearby monitors to improve robustness and capture regional-transport events
-- [ ] **Rolling-origin cross-validation** — multiple test months instead of a single hold-out; tighter confidence intervals on model rankings
-- [ ] **Operational dashboard** — translate horizon-wise errors into colour-coded alert tiers with explicit uncertainty for non-technical operators
-- [ ] **Hybrid model** — combine the RNN with a peak-detection rule layer or a separate extreme-event classifier; route between them based on recent observations
+- [ ] **Quantile / probabilistic forecasts** -  communicate uncertainty bands instead of point estimates; particularly important for peak days where the point estimate is most wrong
+- [ ] **Peak-aware loss function** -  weighted MAE or asymmetric loss that penalises under-prediction on high-pollution episodes more than over-prediction on clean days
+- [ ] **Stronger baselines** -  replace repeat-last with seasonal naive (24h lag) and 7-day same-hour mean; report all three for honest comparison
+- [ ] **Multi-station modelling** -  share signal across nearby monitors to improve robustness and capture regional-transport events
+- [ ] **Rolling-origin cross-validation** -  multiple test months instead of a single hold-out; tighter confidence intervals on model rankings
+- [ ] **Operational dashboard** -  translate horizon-wise errors into colour-coded alert tiers with explicit uncertainty for non-technical operators
+- [ ] **Hybrid model** -  combine the RNN with a peak-detection rule layer or a separate extreme-event classifier; route between them based on recent observations
 
 ---
 
