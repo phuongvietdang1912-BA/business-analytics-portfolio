@@ -47,12 +47,12 @@ This single finding reframes acquisition economics: the cost of getting a new cu
 
 ## 3. Skills Demonstrated
 
-- **Database design** — star schema with surrogate keys, FK constraints, and dense-key validation
-- **SQL (T-SQL)** — bulk imports, transactional ETL, validation harness, 20 business queries
-- **Data modelling** — Kimball dimensional modelling (fact + 5 dimensions)
-- **Data quality** — automated row-count, duplicate, null, range, orphan, and value-consistency checks at both raw and DW layers
-- **Power BI** — DAX measures, calculated columns, multi-page dashboard design
-- **Business analysis** — translating raw data into commercial recommendations
+- **Database design** - star schema with surrogate keys, FK constraints, and dense-key validation
+- **SQL (T-SQL)** - bulk imports, transactional ETL, validation harness, 20 business queries
+- **Data modelling** - Kimball dimensional modelling (fact + 5 dimensions)
+- **Data quality** - automated row-count, duplicate, null, range, orphan, and value-consistency checks at both raw and DW layers
+- **Power BI** - DAX measures, calculated columns, multi-page dashboard design
+- **Business analysis** - translating raw data into commercial recommendations
 
 ---
 
