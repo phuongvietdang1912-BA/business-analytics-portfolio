@@ -25,7 +25,7 @@
 
 ## 1. Business Problem
 
-A telecom provider is losing **roughly 1 in 4 customers (26.54%)** — well above typical industry benchmarks of 15–25%. With **$139.13K in monthly recurring revenue at risk (~$1.67M annualised)**, leadership lacks a clear, segment-level view of:
+A telecom provider is losing **roughly 1 in 4 customers (26.54%)** - well above typical industry benchmarks of 15–25%. With **$139.13K in monthly recurring revenue at risk (~$1.67M annualised)**, leadership lacks a clear, segment-level view of:
 
 - 🔍 **Where** churn is concentrated (which customer profiles are leaving?)
 - 💰 **How much** each segment is costing the business
@@ -37,7 +37,7 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** — well abov
 
 ## 2. Headline Finding
 
-> **75% of revenue at risk sits in just 5 customer micro-segments — accounting for 71% of all churned customers.**
+> **75% of revenue at risk sits in just 5 customer micro-segments - accounting for 71% of all churned customers.**
 
 | Risk Segment | Churn % | Churned | Revenue at Risk (p/m) |
 |---|---:|---:|---:|
@@ -48,13 +48,13 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** — well abov
 | 0–6 mo · MTM · DSL | 49.49% | 245 | $10,999 |
 | **Total (Top 5)** | **56.39%** | **1,329** | **$103,987** |
 
-**Implication:** A surgical retention strategy targeting these five segments — rather than a broad-based programme — captures three quarters of the financial exposure with a fraction of the operational cost.
+**Implication:** A surgical retention strategy targeting these five segments - rather than a broad-based programme - captures three quarters of the financial exposure with a fraction of the operational cost.
 
 ---
 
 ## 3. Dataset Overview
 
-**Source:** [IBM Telco Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) — a widely-used public benchmark dataset.
+**Source:** [IBM Telco Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) - a widely-used public benchmark dataset.
 
 | Attribute | Value |
 |---|---|
@@ -139,7 +139,7 @@ SWITCH(
 ```
 
 ### 📐 Data Model
-A single fact-table model is used here as a **deliberate design choice** — for a 7K-row point-in-time snapshot with no temporal or transactional grain, a star schema would add modelling overhead without analytical benefit. (For a Kimball star-schema implementation, see [Project 2 — Instacart](../02-InstaCart-SQL-PowerBI).) Sort-by columns are applied to `Tenure Band` and `Monthly Charge Band` for natural ordering on visuals.
+A single fact-table model is used here as a **deliberate design choice** - for a 7K-row point-in-time snapshot with no temporal or transactional grain, a star schema would add modelling overhead without analytical benefit. (For a Kimball star-schema implementation, see [Project 2 - Instacart](../02-InstaCart-SQL-PowerBI).) Sort-by columns are applied to `Tenure Band` and `Monthly Charge Band` for natural ordering on visuals.
 
 ---
 
@@ -191,17 +191,17 @@ DIVIDE(
 
 The Power BI report is structured as a **three-page narrative**, with four global slicers (Contract, Internet Service, Payment Method, Tenure Band).
 
-### 📄 Page 1 — Executive Overview
+### 📄 Page 1 - Executive Overview
 > **Audience:** Leadership · **Question answered:** *Where do we stand and where is the bleeding worst?*
 
 <img width="1306" height="730" alt="Executive Overview" src="https://github.com/user-attachments/assets/dd79748b-be97-4f54-80dc-3c02803fbde6" />
 
-### 📄 Page 2 — Customer Segmentation Deep Dive
+### 📄 Page 2 - Customer Segmentation Deep Dive
 > **Audience:** Marketing & CX · **Question answered:** *Who is leaving and why?*
 
 <img width="1305" height="723" alt="Customer Segmentation" src="https://github.com/user-attachments/assets/691b5cd3-c8fc-44d9-ac8b-d4e620622635" />
 
-### 📄 Page 3 — Churn Drivers & Revenue Risk
+### 📄 Page 3 - Churn Drivers & Revenue Risk
 > **Audience:** Product & Finance · **Question answered:** *Where is the financial exposure concentrated?*
 
 <img width="1325" height="747" alt="Churn Drivers and Revenue Risk" src="https://github.com/user-attachments/assets/8c3b56d0-be1d-4baa-b848-5e826dd48ce5" />
@@ -211,7 +211,7 @@ The Power BI report is structured as a **three-page narrative**, with four globa
 ## 7. Key Insights
 
 ### 🔎 1. Tenure shows the steepest single-variable churn gradient
-Customers in their first 6 months churn at **52.94%** vs **6.61%** at 5+ years — a **46-percentage-point absolute gap**. The relationship is monotonic: every additional tenure bracket reduces churn.
+Customers in their first 6 months churn at **52.94%** vs **6.61%** at 5+ years - a **46-percentage-point absolute gap**. The relationship is monotonic: every additional tenure bracket reduces churn.
 
 | Tenure Band | Churn Rate | Revenue at Risk |
 |---|---:|---:|
@@ -223,12 +223,12 @@ Customers in their first 6 months churn at **52.94%** vs **6.61%** at 5+ years �
 | 60+ months | **6.61%** 🟢 | $9K |
 
 ### 🔎 2. Contract type rivals tenure as a churn driver
-Month-to-month customers churn at **42.71%** vs **2.83%** for two-year contracts — a **40-point absolute gap**, comparable in magnitude to the tenure effect. Tenure and contract type together explain most of the churn variance and likely interact (short-tenure customers are also far more likely to be MTM).
+Month-to-month customers churn at **42.71%** vs **2.83%** for two-year contracts - a **40-point absolute gap**, comparable in magnitude to the tenure effect. Tenure and contract type together explain most of the churn variance and likely interact (short-tenure customers are also far more likely to be MTM).
 
 ### 🔎 3. Payment friction is a hidden killer
-Electronic-check users churn at **45.29%** vs **~16%** for autopay methods — a 29-point gap. Each billing cycle is effectively a re-purchase decision when payment isn't automated.
+Electronic-check users churn at **45.29%** vs **~16%** for autopay methods - a 29-point gap. Each billing cycle is effectively a re-purchase decision when payment isn't automated.
 
-### 🔎 4. Fiber optic churns more than DSL — worth investigating, not assuming
+### 🔎 4. Fiber optic churns more than DSL - worth investigating, not assuming
 Fiber optic = **41.89%** churn vs DSL = **18.96%**. A natural hypothesis is that fiber customers without bundled online security are under-served: those without it churn at **49.36%** vs **21.81%** with it.
 
 > ⚠️ **Caveat:** This relationship is likely confounded with contract type, tenure, and monthly charges (fiber skews short-tenure / high-charge / MTM). Recommended next step is an **A/B test** of the security bundle on new fiber customers, controlling for contract and tenure, before assuming bundling causes retention.
@@ -255,7 +255,7 @@ Four prioritised plays, sequenced by impact-vs-effort:
 | **R3** | Migrate electronic-check payers to autopay (one-time bill credit) | All ~2.4K e-check users | $10–15K | 🔴 High |
 | **R4** | A/B test: bundle online security + tech support into fiber plans | New fiber customers (test cohort) | $20–35K | 🟠 Med-High |
 
-> **📐 Impact estimation methodology:** Each estimate assumes a target reduction in segment churn (typically 20–35% relative) applied to current revenue at risk in the affected segment. Ranges reflect conservative-to-optimistic outcomes pending real-world A/B validation. Estimates are **directional**, not commitments — they exist to prioritise effort, not to forecast P&L.
+> **📐 Impact estimation methodology:** Each estimate assumes a target reduction in segment churn (typically 20–35% relative) applied to current revenue at risk in the affected segment. Ranges reflect conservative-to-optimistic outcomes pending real-world A/B validation. Estimates are **directional**, not commitments - they exist to prioritise effort, not to forecast P&L.
 
 ### 🎯 Combined Target
 Reduce overall churn from **26.54% → <20%** within 12 months and recover **$35–55K/month** in revenue at risk within two quarters.
@@ -266,7 +266,7 @@ Reduce overall churn from **26.54% → <20%** within 12 months and recover **$35
 
 A few constraints to keep in mind when interpreting these findings:
 
-- **Point-in-time snapshot.** No time dimension means we can't validate whether observed patterns are stable, seasonal, or trending — and we can't measure intervention impact over time without follow-up data.
+- **Point-in-time snapshot.** No time dimension means we can't validate whether observed patterns are stable, seasonal, or trending - and we can't measure intervention impact over time without follow-up data.
 - **No cost-of-acquisition data.** Revenue-at-risk numbers are gross, not net of CAC, so true Customer Lifetime Value impact can't be modelled here.
 - **Benchmark dataset.** The IBM Telco dataset is a public learning benchmark; real-world telco churn drivers may differ in magnitude and may include drivers not captured here (network quality, customer service contacts, competitor pricing).
 - **Single-variable analysis.** Insights are based on segmented descriptive statistics, not a multivariate model. The "Strongest predictor" question is left to the predictive modelling phase (see Roadmap).
@@ -291,7 +291,7 @@ A few constraints to keep in mind when interpreting these findings:
 
 - 📁 **Project Folder:** [`01-Telco-project`](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/tree/main/01-Telco-project)
 - 📄 **Full Business Analytics Report (PDF):** [View Report](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/blob/main/01-Telco-project/Telco%20Churn%20Report.pdf)
-- 📂 **Dataset:** [Kaggle — IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
+- 📂 **Dataset:** [Kaggle - IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
 
 ---
 
@@ -322,7 +322,7 @@ A few constraints to keep in mind when interpreting these findings:
 
 - [ ] Build a **predictive churn model** (logistic regression / XGBoost) for customer-level scoring, with feature importance to formally rank churn drivers
 - [ ] Add **Customer Lifetime Value (CLV)** modelling to pair with churn probability
-- [ ] Set up an **A/B testing framework** to validate retention plays before scale-up — starting with the fiber + online-security bundle (R4)
+- [ ] Set up an **A/B testing framework** to validate retention plays before scale-up - starting with the fiber + online-security bundle (R4)
 - [ ] Connect to a live data source for **automated refresh**
 
 ---
