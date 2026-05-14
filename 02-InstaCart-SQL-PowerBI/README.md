@@ -69,8 +69,8 @@ CSV files ──▶ raw schema ──▶ dw schema (star) ──▶ Power BI
 
 **Two-layer warehouse:**
 
-- **`raw` schema** — direct landing zone for the 6 source CSVs (orders, products, aisles, departments, prior, train). Mirrors the source files 1:1 with no transformation.
-- **`dw` schema** — Kimball star schema. Surrogate keys, FK constraints, and a single fact table referencing 5 dimensions.
+- **`raw` schema** - direct landing zone for the 6 source CSVs (orders, products, aisles, departments, prior, train). Mirrors the source files 1:1 with no transformation.
+- **`dw` schema** - Kimball star schema. Surrogate keys, FK constraints, and a single fact table referencing 5 dimensions.
 
 ETL runs inside a single transaction with full rollback on failure (file `07_load_dw.sql`).
 
@@ -100,7 +100,7 @@ This validation-first approach is what allows the DW load to run as a single tra
 | `dw.dim_aisle` | Dimension | One row per aisle |
 | `dw.dim_department` | Dimension | One row per department |
 
-The fact is **event-grain** (one row per item-in-order). Instacart provides no price or quantity data, so additive measures are *derived* through aggregation rather than stored — basket size, reorder ratio, basket position, and order frequency all fall out of `COUNT` / `AVG` over the fact. `reordered` (BIT) and `add_to_cart_order` (INT) are the source-level transactional attributes; `order_id` is retained as a degenerate dimension.
+The fact is **event-grain** (one row per item-in-order). Instacart provides no price or quantity data, so additive measures are *derived* through aggregation rather than stored - basket size, reorder ratio, basket position, and order frequency all fall out of `COUNT` / `AVG` over the fact. `reordered` (BIT) and `add_to_cart_order` (INT) are the source-level transactional attributes; `order_id` is retained as a degenerate dimension.
 
 > **Note on terminology:** "Reorder rate" in this project = **% of items in a given order that the customer has previously purchased** (the dataset's `reordered` flag, aggregated). This is distinct from customer-level retention or product-level repeat-purchase rate.
 
@@ -110,11 +110,11 @@ The fact is **event-grain** (one row per item-in-order). Instacart provides no p
 
 | # | Finding | Business implication |
 |---|---|---|
-| 1 | **Reorder rate climbs from 0% (order 1) → ~85% (order 5+)**; overall blended rate is 59% | Order 5 is the loyalty inflection point — onboarding economics should be sized around getting customers to that threshold |
-| 2 | **Produce + dairy eggs** is the most frequent department co-purchase (~1.8M orders); produce appears in 6 of the top 10 pairs | Produce is the universal anchor category. ⚠️ *Frequency alone overstates cross-sell strength — see caveat below* |
+| 1 | **Reorder rate climbs from 0% (order 1) → ~85% (order 5+)**; overall blended rate is 59% | Order 5 is the loyalty inflection point - onboarding economics should be sized around getting customers to that threshold |
+| 2 | **Produce + dairy eggs** is the most frequent department co-purchase (~1.8M orders); produce appears in 6 of the top 10 pairs | Produce is the universal anchor category. ⚠️ *Frequency alone overstates cross-sell strength - see caveat below* |
 | 3 | Average gap between orders is **11 days**, contracting from ~15 to ~5 days as customers mature | Reorder reminder cadence should be **personalised by tenure**, not set globally |
-| 4 | Sundays/Mondays drive peak volume; 9 AM–5 PM is the active window | Schedule promotions and ad spend around this window (note: day-of-week mapping is inferred — see Limitations) |
-| 5 | Pantry has high item volume but the lowest reorder rate (~37%) | ⚠️ *Likely driven by replenishment cycle (pantry items last months), not weak loyalty — needs lifecycle-adjusted analysis before acting* |
+| 4 | Sundays/Mondays drive peak volume; 9 AM–5 PM is the active window | Schedule promotions and ad spend around this window (note: day-of-week mapping is inferred - see Limitations) |
+| 5 | Pantry has high item volume but the lowest reorder rate (~37%) | ⚠️ *Likely driven by replenishment cycle (pantry items last months), not weak loyalty - needs lifecycle-adjusted analysis before acting* |
 
 ### ⚠️ Caveat on co-purchase rankings
 
@@ -124,7 +124,7 @@ The Top-10 pair list is ranked by **raw co-occurrence**, which favours pairs of 
 lift(A,B) = P(A ∩ B) / ( P(A) × P(B) )
 ```
 
-Pairs with `lift > 1` indicate a true associative relationship beyond chance. Computing lift across all department pairs is the natural next step (see Roadmap) and would likely re-rank the top pairs significantly — surfacing genuinely complementary categories that raw co-occurrence hides.
+Pairs with `lift > 1` indicate a true associative relationship beyond chance. Computing lift across all department pairs is the natural next step (see Roadmap) and would likely re-rank the top pairs significantly - surfacing genuinely complementary categories that raw co-occurrence hides.
 
 ---
 
@@ -140,7 +140,7 @@ Five plays derived directly from the findings, sequenced by impact-vs-effort:
 | **R4** | Investigate pantry segment with a **replenishment-adjusted** reorder metric before acting on the low rate | Finding 5 (pantry interpretation) | 🟡 Medium |
 | **R5** | Concentrate paid promotion spend in the Sun/Mon × 9AM–5PM window | Finding 4 (peak window) | 🟢 Quick win |
 
-> **📐 Note on impact estimation:** Unlike a transactional dataset with revenue, the Instacart sample lacks price and quantity, so financial impact estimates aren't computed here. Recommendations are sized by **strategic priority** and **finding strength**, not dollar projection. With pricing data, R1 (first-5-orders programme) would be the natural candidate for revenue modelling — onboarding-funnel uplift is the most measurable lever.
+> **📐 Note on impact estimation:** Unlike a transactional dataset with revenue, the Instacart sample lacks price and quantity, so financial impact estimates aren't computed here. Recommendations are sized by **strategic priority** and **finding strength**, not dollar projection. With pricing data, R1 (first-5-orders programme) would be the natural candidate for revenue modelling - onboarding-funnel uplift is the most measurable lever.
 
 ---
 
@@ -148,29 +148,29 @@ Five plays derived directly from the findings, sequenced by impact-vs-effort:
 
 The Power BI report has four pages, each answering one analytical question.
 
-### 📄 Page 1 — Executive Overview
+### 📄 Page 1 - Executive Overview
 > *"How is the business performing?"*
 
 <img width="1295" height="736" alt="Executive Overview" src="https://github.com/user-attachments/assets/d6169bc1-cdc8-4c9a-a61f-f6393a939780" />
 
 KPIs, reorder behaviour curve, and order-timing patterns at a macro level.
 
-### 📄 Page 2 — Product & Category Insight
+### 📄 Page 2 - Product & Category Insight
 > *"What do customers buy?"*
 
 <img width="1300" height="732" alt="Product and Category Insight" src="https://github.com/user-attachments/assets/e48b7ebd-f53b-4617-9d39-c7cbb34aa3fa" />
 
 Department-level volume vs reorder rate, aisle-level loyalty rankings, and a scatter plot identifying the high-volume + high-loyalty sweet spot.
 
-### 📄 Page 3 — Customer Behaviour
+### 📄 Page 3 - Customer Behaviour
 > *"Who are the customers?"*
 
 <img width="1294" height="734" alt="Customer Behaviour" src="https://github.com/user-attachments/assets/dc286542-a7f7-4403-85cf-22ace25c9f69" />
 
 Customer segmentation by lifetime order count, reorder cadence, and how reorder gaps shrink as customers mature.
 
-### 📄 Page 4 — Basket & Recommendations
-> *"How do they buy together — and what should we do?"*
+### 📄 Page 4 - Basket & Recommendations
+> *"How do they buy together - and what should we do?"*
 
 <img width="1303" height="723" alt="Basket and Recommendations" src="https://github.com/user-attachments/assets/d9c0f0b1-f2fd-4d0b-9708-9ff187cf46fd" />
 
@@ -181,11 +181,11 @@ Department co-purchase pairs (cross-sell candidates), basket size distribution, 
 ## 9. Design Decisions Worth Noting
 
 - **Two-layer warehouse (`raw` + `dw`)** rather than transforming on import. Keeps the source layer auditable and the analytics layer clean.
-- **Transactional ETL with rollback** — the load either fully succeeds or leaves the DW empty. No half-loaded states.
-- **FK constraints dropped during load, recreated after** — avoids per-row FK validation cost on a multi-million-row insert.
+- **Transactional ETL with rollback** - the load either fully succeeds or leaves the DW empty. No half-loaded states.
+- **FK constraints dropped during load, recreated after** - avoids per-row FK validation cost on a multi-million-row insert.
 - **Time-of-order attributes on `dim_order`** rather than a separate `dim_time`. Documented as a deliberate simplification; `dim_time` is on the Roadmap.
-- **Event-grain fact, no stored measures** — Instacart provides no price/quantity, so the fact stores presence; measures are derived.
-- **Dense surrogate key validation** — sanity check that the IDENTITY load is gap-free (useful for a controlled portfolio load; relaxed in production).
+- **Event-grain fact, no stored measures** - Instacart provides no price/quantity, so the fact stores presence; measures are derived.
+- **Dense surrogate key validation** - sanity check that the IDENTITY load is gap-free (useful for a controlled portfolio load; relaxed in production).
 
 ---
 
@@ -230,7 +230,7 @@ A few constraints to keep in mind when interpreting these findings:
    06_dw_tables.sql
    07_load_dw.sql
    08_dw_validation.sql        (verify all checks pass)
-   09_business_queries.sql     (optional — runs analysis queries directly)
+   09_business_queries.sql     (optional - runs analysis queries directly)
    ```
 
 4. **Open the Power BI file** (`powerbi/instacart_analytics.pbix`) and update the SQL Server connection to point at your local `InstacartBA` database.
@@ -266,13 +266,13 @@ A few constraints to keep in mind when interpreting these findings:
 
 ## 13. What I'd Do Next
 
-- [ ] **Compute department-pair lift** in `09_business_queries.sql` and re-rank cross-sell candidates — the highest-impact analytical upgrade available
-- [ ] **Replenishment-adjusted reorder metric** — re-evaluate pantry and other low-frequency categories against expected lifecycle, not raw 30-day reorder rate
-- [ ] **Customer-level cohort analysis** — measure retention curves by acquisition cohort, not just item-level reorder
-- [ ] **Promote `dim_time`** — split `order_dow` and `order_hour_of_day` into a proper time dimension
-- [ ] **Incremental load pattern** — current ETL is full-refresh; production would need merge / change-tracking
-- [ ] **dbt or SSIS migration** — orchestrated pipeline with dependencies, lineage, and tests
-- [ ] **Predictive layer** — train a reorder-prediction model on the `train` eval set
+- [ ] **Compute department-pair lift** in `09_business_queries.sql` and re-rank cross-sell candidates - the highest-impact analytical upgrade available
+- [ ] **Replenishment-adjusted reorder metric** - re-evaluate pantry and other low-frequency categories against expected lifecycle, not raw 30-day reorder rate
+- [ ] **Customer-level cohort analysis** - measure retention curves by acquisition cohort, not just item-level reorder
+- [ ] **Promote `dim_time`** - split `order_dow` and `order_hour_of_day` into a proper time dimension
+- [ ] **Incremental load pattern** - current ETL is full-refresh; production would need merge / change-tracking
+- [ ] **dbt or SSIS migration** - orchestrated pipeline with dependencies, lineage, and tests
+- [ ] **Predictive layer** - train a reorder-prediction model on the `train` eval set
 
 ---
 
