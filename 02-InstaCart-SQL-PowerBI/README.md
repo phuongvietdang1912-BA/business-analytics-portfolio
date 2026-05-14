@@ -39,7 +39,7 @@ This project answers that need with a full data pipeline: from raw CSV files thr
 
 ## 2. Headline Finding
 
-> **A customer's 5th order is the loyalty inflection point — reorder rate climbs from 0% on order 1 to ~85% by order 5, then plateaus.**
+> **A customer's 5th order is the loyalty inflection point - reorder rate climbs from 0% on order 1 to ~85% by order 5, then plateaus.**
 
 This single finding reframes acquisition economics: the cost of getting a new customer to their **5th order** is the cost of converting them into a long-term reorder customer. Everything before order 5 is high-risk; everything after is high-margin and high-retention. Marketing spend, onboarding incentives, and reorder-reminder cadence should all be sized around this threshold.
 
