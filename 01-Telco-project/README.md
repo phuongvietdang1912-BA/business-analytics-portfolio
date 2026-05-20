@@ -11,16 +11,16 @@
 ## 📑 Table of Contents
 1. [Business Problem](#1-business-problem)
 2. [Headline Finding](#2-headline-finding)
-3. **[🔴 Live Dashboard](#-live-dashboard)** ← featured
-4. [Dataset Overview](#3-dataset-overview)
-5. [Data Cleaning & Modelling](#4-data-cleaning--modelling)
-6. [Key Metrics / KPIs](#5-key-metrics--kpis)
-7. [Dashboard / Analysis](#6-dashboard--analysis)
-8. [Key Insights](#7-key-insights)
-9. [Business Recommendations](#8-business-recommendations)
-10. [Limitations](#9-limitations)
-11. [Tools Used](#10-tools-used)
-12. [Links](#11-links)
+3. **[🔴 Live Dashboard](#3-live-dashboard)** ← featured
+4. [Dataset Overview](#4-dataset-overview)
+5. [Data Cleaning & Modelling](#5-data-cleaning--modelling)
+6. [Key Metrics / KPIs](#6-key-metrics--kpis)
+7. [Dashboard / Analysis](#7-dashboard--analysis)
+8. [Key Insights](#8-key-insights)
+9. [Business Recommendations](#9-business-recommendations)
+10. [Limitations](#10-limitations)
+11. [Tools Used](#11-tools-used)
+12. [Links](#12-links)
 
 ---
 
@@ -53,7 +53,7 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** - well above 
 
 ---
 
-## 🔴 Live Dashboard
+## 3.🔴 Live Dashboard
 
 **👉 [View the interactive Power BI report]([https://app.powerbi.com/view?r=eyJrIjoiYzA1YzE4N2ItOTc1Yy00ZmMzLThkNjgtMjRkOGIxYzMwNGEzIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9](https://app.fabric.microsoft.com/view?r=eyJrIjoiMDlkYjYzY2QtMjRmZC00N2FjLThhZTAtZmNjMjQxMzkzZDgyIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9))**  (no install required).
 
@@ -61,7 +61,7 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** - well above 
 
 ---
 
-## 3. Dataset Overview
+## 4. Dataset Overview
 
 **Source:** [IBM Telco Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) - a widely-used public benchmark dataset.
 
@@ -83,7 +83,7 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** - well above 
 
 ---
 
-## 4. Data Cleaning & Modelling
+## 5. Data Cleaning & Modelling
 
 ### 🧹 Cleaning Steps
 
@@ -152,7 +152,7 @@ A single fact-table model is used here as a **deliberate design choice** - for a
 
 ---
 
-## 5. Key Metrics / KPIs
+## 6. Key Metrics / KPIs
 
 Eight core DAX measures power the entire report:
 
@@ -196,7 +196,7 @@ DIVIDE(
 
 ---
 
-## 6. Dashboard / Analysis
+## 7. Dashboard / Analysis
 
 The Power BI report is structured as a **three-page narrative**, with four global slicers (Contract, Internet Service, Payment Method, Tenure Band).
 
@@ -217,7 +217,7 @@ The Power BI report is structured as a **three-page narrative**, with four globa
 
 ---
 
-## 7. Key Insights
+## 8. Key Insights
 
 ### 🔎 1. Tenure shows the steepest single-variable churn gradient
 Customers in their first 6 months churn at **52.94%** vs **6.61%** at 5+ years - a **46-percentage-point absolute gap**. The relationship is monotonic: every additional tenure bracket reduces churn.
@@ -253,7 +253,7 @@ Demographics aren't directly actionable as a campaign target, but should be inco
 
 ---
 
-## 8. Business Recommendations
+## 9. Business Recommendations
 
 Four prioritised plays, sequenced by impact-vs-effort:
 
@@ -271,7 +271,7 @@ Reduce overall churn from **26.54% → <20%** within 12 months and recover **$35
 
 ---
 
-## 9. Limitations
+## 10. Limitations
 
 A few constraints to keep in mind when interpreting these findings:
 
@@ -284,7 +284,7 @@ A few constraints to keep in mind when interpreting these findings:
 
 ---
 
-## 10. Tools Used
+## 11. Tools Used
 
 | Tool | Purpose |
 |---|---|
@@ -296,7 +296,7 @@ A few constraints to keep in mind when interpreting these findings:
 
 ---
 
-## 11. Links
+## 12. Links
 
 - 📁 **Project Folder:** [`01-Telco-project`](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/tree/main/01-Telco-project)
 - 📄 **Full Business Analytics Report (PDF):** [View Report](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/blob/main/01-Telco-project/Telco%20Churn%20Report.pdf)
