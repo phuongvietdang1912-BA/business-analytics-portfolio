@@ -11,7 +11,7 @@
 ## 📑 Table of Contents
 1. [Business Problem](#1-business-problem)
 2. [Headline Finding](#2-headline-finding)
-3. **[🔴 Live Dashboard] <-- Featured
+3. **[🔴 Live Dashboard](#-live-dashboard)** ← featured
 4. [Dataset Overview](#3-dataset-overview)
 5. [Data Cleaning & Modelling](#4-data-cleaning--modelling)
 6. [Key Metrics / KPIs](#5-key-metrics--kpis)
