@@ -49,7 +49,7 @@ This single finding reframes acquisition economics: the cost of getting a new cu
 
 ## 🔴 Live Dashboard
 
-**👉 [View the interactive Power BI report](https://app.fabric.microsoft.com/view?r=eyJrIjoiYzA1YzE4N2ItOTc1Yy00ZmMzLThkNjgtMjRkOGIxYzMwNGEzIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9&pageName=1485ed93d0aca2745394)** — no install required.
+**👉 [View the interactive Power BI report](https://app.fabric.microsoft.com/view?r=eyJrIjoiYzA1YzE4N2ItOTc1Yy00ZmMzLThkNjgtMjRkOGIxYzMwNGEzIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9&pageName=1485ed93d0aca2745394)** (no install required).
 
 *Best viewed on desktop. Loads in ~10 seconds.*
 
