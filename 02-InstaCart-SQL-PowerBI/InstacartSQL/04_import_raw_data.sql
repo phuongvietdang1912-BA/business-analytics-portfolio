@@ -26,7 +26,7 @@ USE InstacartBA;
 -- CONFIGURATION: SET THIS BEFORE RUNNING
 -- Example: N'C:\Data\Instacart\'   (must end with trailing backslash)
 -- -----------------------------------------------------------------------------
-DECLARE @BasePath NVARCHAR(500) = N'C:\Users\Admin\Downloads\InstaCart Online Grocery Market Basket Analysis\';
+DECLARE @BasePath NVARCHAR(500) = N'C:\YourPath\InstaCart\';
 DECLARE @sql NVARCHAR(MAX);
 
 -- Fail loudly if user forgot to set the path.
