@@ -55,7 +55,7 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** - well above 
 
 ## 3.🔴 Live Dashboard
 
-**👉 [View the interactive Power BI report]([https://app.powerbi.com/view?r=eyJrIjoiYzA1YzE4N2ItOTc1Yy00ZmMzLThkNjgtMjRkOGIxYzMwNGEzIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9](https://app.fabric.microsoft.com/view?r=eyJrIjoiMDlkYjYzY2QtMjRmZC00N2FjLThhZTAtZmNjMjQxMzkzZDgyIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9))**  (no install required).
+**👉 [View the interactive Power BI report](https://app.fabric.microsoft.com/view?r=eyJrIjoiMDlkYjYzY2QtMjRmZC00N2FjLThhZTAtZmNjMjQxMzkzZDgyIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9)**  (no install required).
 
 *Best viewed on desktop. Loads in ~10 seconds.*
 
