@@ -11,15 +11,16 @@
 ## 📑 Table of Contents
 1. [Business Problem](#1-business-problem)
 2. [Headline Finding](#2-headline-finding)
-3. [Dataset Overview](#3-dataset-overview)
-4. [Data Cleaning & Modelling](#4-data-cleaning--modelling)
-5. [Key Metrics / KPIs](#5-key-metrics--kpis)
-6. [Dashboard / Analysis](#6-dashboard--analysis)
-7. [Key Insights](#7-key-insights)
-8. [Business Recommendations](#8-business-recommendations)
-9. [Limitations](#9-limitations)
-10. [Tools Used](#10-tools-used)
-11. [Links](#11-links)
+3. 🔴 Live Dashboard <-- Featured
+4. [Dataset Overview](#3-dataset-overview)
+5. [Data Cleaning & Modelling](#4-data-cleaning--modelling)
+6. [Key Metrics / KPIs](#5-key-metrics--kpis)
+7. [Dashboard / Analysis](#6-dashboard--analysis)
+8. [Key Insights](#7-key-insights)
+9. [Business Recommendations](#8-business-recommendations)
+10. [Limitations](#9-limitations)
+11. [Tools Used](#10-tools-used)
+12. [Links](#11-links)
 
 ---
 
@@ -54,7 +55,7 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** - well above 
 
 ## 🔴 Live Dashboard
 
-**👉 [View the interactive Power BI report]([https://app.powerbi.com/view?r=eyJrIjoiYzA1YzE4N2ItOTc1Yy00ZmMzLThkNjgtMjRkOGIxYzMwNGEzIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9](https://app.fabric.microsoft.com/view?r=eyJrIjoiMDlkYjYzY2QtMjRmZC00N2FjLThhZTAtZmNjMjQxMzkzZDgyIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9))** — no install required.
+**👉 [View the interactive Power BI report]([https://app.powerbi.com/view?r=eyJrIjoiYzA1YzE4N2ItOTc1Yy00ZmMzLThkNjgtMjRkOGIxYzMwNGEzIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9](https://app.fabric.microsoft.com/view?r=eyJrIjoiMDlkYjYzY2QtMjRmZC00N2FjLThhZTAtZmNjMjQxMzkzZDgyIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9))**  (no install required).
 
 *Best viewed on desktop. Loads in ~10 seconds.*
 
@@ -300,7 +301,7 @@ A few constraints to keep in mind when interpreting these findings:
 - 📁 **Project Folder:** [`01-Telco-project`](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/tree/main/01-Telco-project)
 - 📄 **Full Business Analytics Report (PDF):** [View Report](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/blob/main/01-Telco-project/Telco%20Churn%20Report.pdf)
 - 📂 **Dataset:** [Kaggle - IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
-- 🔴 **Live Dashboard**: [View Dashboard](https://app.fabric.microsoft.com/view?r=eyJrIjoiMDlkYjYzY2QtMjRmZC00N2FjLThhZTAtZmNjMjQxMzkzZDgyIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9)
+- 🔴 **Live Dashboard**: [View the interactive Power BI report](https://app.fabric.microsoft.com/view?r=eyJrIjoiMDlkYjYzY2QtMjRmZC00N2FjLThhZTAtZmNjMjQxMzkzZDgyIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9)
 
 ---
 
