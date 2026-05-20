@@ -52,6 +52,14 @@ A telecom provider is losing **roughly 1 in 4 customers (26.54%)** - well above 
 
 ---
 
+## 🔴 Live Dashboard
+
+**👉 [View the interactive Power BI report]([https://app.powerbi.com/view?r=eyJrIjoiYzA1YzE4N2ItOTc1Yy00ZmMzLThkNjgtMjRkOGIxYzMwNGEzIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9](https://app.fabric.microsoft.com/view?r=eyJrIjoiMDlkYjYzY2QtMjRmZC00N2FjLThhZTAtZmNjMjQxMzkzZDgyIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9))** — no install required.
+
+*Best viewed on desktop. Loads in ~10 seconds.*
+
+---
+
 ## 3. Dataset Overview
 
 **Source:** [IBM Telco Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) - a widely-used public benchmark dataset.
@@ -194,17 +202,17 @@ The Power BI report is structured as a **three-page narrative**, with four globa
 ### 📄 Page 1 - Executive Overview
 > **Audience:** Leadership · **Question answered:** *Where do we stand and where is the bleeding worst?*
 
-<img width="1306" height="730" alt="Executive Overview" src="https://github.com/user-attachments/assets/dd79748b-be97-4f54-80dc-3c02803fbde6" />
+<img width="1519" height="852" alt="image" src="https://github.com/user-attachments/assets/652d8b85-7c00-4f63-abc9-372d690ae460" />
 
 ### 📄 Page 2 - Customer Segmentation Deep Dive
 > **Audience:** Marketing & CX · **Question answered:** *Who is leaving and why?*
 
-<img width="1305" height="723" alt="Customer Segmentation" src="https://github.com/user-attachments/assets/691b5cd3-c8fc-44d9-ac8b-d4e620622635" />
+<img width="1520" height="850" alt="image" src="https://github.com/user-attachments/assets/080c84eb-d6a0-4a6b-ba6f-b82c8bf66114" />
 
 ### 📄 Page 3 - Churn Drivers & Revenue Risk
 > **Audience:** Product & Finance · **Question answered:** *Where is the financial exposure concentrated?*
 
-<img width="1325" height="747" alt="Churn Drivers and Revenue Risk" src="https://github.com/user-attachments/assets/8c3b56d0-be1d-4baa-b848-5e826dd48ce5" />
+<img width="1516" height="853" alt="image" src="https://github.com/user-attachments/assets/9487824a-0952-4eeb-a346-5944faffe2ba" />
 
 ---
 
@@ -292,6 +300,7 @@ A few constraints to keep in mind when interpreting these findings:
 - 📁 **Project Folder:** [`01-Telco-project`](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/tree/main/01-Telco-project)
 - 📄 **Full Business Analytics Report (PDF):** [View Report](https://github.com/phuongvietdang1912-BA/business-analytics-portfolio/blob/main/01-Telco-project/Telco%20Churn%20Report.pdf)
 - 📂 **Dataset:** [Kaggle - IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
+- 🔴 **Live Dashboard**: [View Dashboard](https://app.fabric.microsoft.com/view?r=eyJrIjoiMDlkYjYzY2QtMjRmZC00N2FjLThhZTAtZmNjMjQxMzkzZDgyIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9)
 
 ---
 
