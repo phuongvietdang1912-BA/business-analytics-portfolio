@@ -7,7 +7,8 @@
 ![Kimball](https://img.shields.io/badge/Modelling-Kimball-1F77B4?style=flat)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-<img width="1293" height="727" alt="Instacart cover" src="https://github.com/user-attachments/assets/bc9728fd-ffe2-406b-9ec5-80f8eaf09a7b" />
+<img width="1518" height="850" alt="image" src="https://github.com/user-attachments/assets/4b539d98-7511-4fd6-a008-62a66a1eaa51" />
+
 
 ---
 
@@ -153,28 +154,29 @@ The report has been published: [InstaCart Report](https://app.powerbi.com/view?r
 ### 📄 Page 1 - Executive Overview
 > *"How is the business performing?"*
 
-<img width="1295" height="736" alt="Executive Overview" src="https://github.com/user-attachments/assets/d6169bc1-cdc8-4c9a-a61f-f6393a939780" />
+<img width="1518" height="850" alt="image" src="https://github.com/user-attachments/assets/307950f9-25d9-465f-8a17-06f8ad2a9f5b" />
 
 KPIs, reorder behaviour curve, and order-timing patterns at a macro level.
 
 ### 📄 Page 2 - Product & Category Insight
 > *"What do customers buy?"*
 
-<img width="1300" height="732" alt="Product and Category Insight" src="https://github.com/user-attachments/assets/e48b7ebd-f53b-4617-9d39-c7cbb34aa3fa" />
+<img width="1517" height="848" alt="image" src="https://github.com/user-attachments/assets/ea565663-979f-45f9-a814-67ee41273266" />
 
 Department-level volume vs reorder rate, aisle-level loyalty rankings, and a scatter plot identifying the high-volume + high-loyalty sweet spot.
 
 ### 📄 Page 3 - Customer Behaviour
 > *"Who are the customers?"*
 
-<img width="1294" height="734" alt="Customer Behaviour" src="https://github.com/user-attachments/assets/dc286542-a7f7-4403-85cf-22ace25c9f69" />
+<img width="1517" height="849" alt="image" src="https://github.com/user-attachments/assets/27d1ea0e-3000-4f9a-8154-58d11a677fbf" />
 
 Customer segmentation by lifetime order count, reorder cadence, and how reorder gaps shrink as customers mature.
 
 ### 📄 Page 4 - Basket & Recommendations
 > *"How do they buy together - and what should we do?"*
 
-<img width="1303" height="723" alt="Basket and Recommendations" src="https://github.com/user-attachments/assets/d9c0f0b1-f2fd-4d0b-9708-9ff187cf46fd" />
+<img width="1518" height="849" alt="image" src="https://github.com/user-attachments/assets/6ce685ba-6c21-497b-8757-7a0f2fda8858" />
+
 
 Department co-purchase pairs (cross-sell candidates), basket size distribution, and products that consistently appear early in the cart (planned staples).
 
