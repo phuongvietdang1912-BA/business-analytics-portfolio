@@ -264,13 +264,8 @@ A few constraints to keep in mind when interpreting these findings:
 │   ├── 08_dw_validation.sql         # DW layer validation harness
 │   └── 09_business_queries.sql      # 20 business analysis queries
 ├── powerbi/
-│   └── instacart_analytics.pbix
-└── images/
-    ├── 01_executive_overview.png
-    ├── 02_product_category.png
-    ├── 03_customer_behavior.png
-    ├── 04_basket_recommendations.png
-    └── star_schema.png
+    └── InstaCart Live Dashboard
+
 ```
 
 ---
