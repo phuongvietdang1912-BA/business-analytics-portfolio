@@ -157,8 +157,6 @@ Five plays derived directly from the findings, sequenced by impact-vs-effort:
 
 The Power BI report has four pages, each answering one analytical question.
 
-The report has been published: [InstaCart Report](https://app.powerbi.com/view?r=eyJrIjoiYzA1YzE4N2ItOTc1Yy00ZmMzLThkNjgtMjRkOGIxYzMwNGEzIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9)
-
 ### 📄 Page 1 - Executive Overview
 > *"How is the business performing?"*
 
