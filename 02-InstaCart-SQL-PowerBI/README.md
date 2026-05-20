@@ -15,18 +15,19 @@
 ## 📑 Table of Contents
 1. [Problem Statement](#1-problem-statement)
 2. [Headline Finding](#2-headline-finding)
-3. [Skills Demonstrated](#3-skills-demonstrated)
-4. [Architecture](#4-architecture)
-5. [Data Model](#5-data-model)
-6. [Key Findings](#6-key-findings)
-7. [Business Recommendations](#7-business-recommendations)
-8. [Dashboard](#8-dashboard)
-9. [Design Decisions Worth Noting](#9-design-decisions-worth-noting)
-10. [Limitations](#10-limitations)
-11. [How to Run](#11-how-to-run)
-12. [Project Structure](#12-project-structure)
-13. [What I'd Do Next](#13-what-id-do-next)
-14. [Author](#14-author)
+3. **[🔴 Live Dashboard](#-live-dashboard)** ← featured
+4. [Skills Demonstrated](#3-skills-demonstrated)
+5. [Architecture](#4-architecture)
+6. [Data Model](#5-data-model)
+7. [Key Findings](#6-key-findings)
+8. [Business Recommendations](#7-business-recommendations)
+9. [Dashboard](#8-dashboard)
+10. [Design Decisions Worth Noting](#9-design-decisions-worth-noting)
+11. [Limitations](#10-limitations)
+12. [How to Run](#11-how-to-run)
+13. [Project Structure](#12-project-structure)
+14. [What I'd Do Next](#13-what-id-do-next)
+15. [Author](#14-author)
 
 ---
 
