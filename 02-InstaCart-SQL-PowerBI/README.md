@@ -46,6 +46,14 @@ This single finding reframes acquisition economics: the cost of getting a new cu
 
 ---
 
+## 🔴 Live Dashboard
+
+**👉 [View the interactive Power BI report](https://app.powerbi.com/view?r=eyJrIjoiYzA1YzE4N2ItOTc1Yy00ZmMzLThkNjgtMjRkOGIxYzMwNGEzIiwidCI6IjIzMjYxY2E4LTZjMDAtNGRkOS05NGMxLWFmODE1ZDVkMmRmYyJ9)** — no install required.
+
+*Best viewed on desktop. Loads in ~10 seconds.*
+
+---
+
 ## 3. Skills Demonstrated
 
 - **Database design** - star schema with surrogate keys, FK constraints, and dense-key validation
