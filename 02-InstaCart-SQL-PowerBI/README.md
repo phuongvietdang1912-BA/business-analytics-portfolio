@@ -7,8 +7,7 @@
 ![Kimball](https://img.shields.io/badge/Modelling-Kimball-1F77B4?style=flat)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-<img width="1518" height="850" alt="image" src="https://github.com/user-attachments/assets/4b539d98-7511-4fd6-a008-62a66a1eaa51" />
-
+<img width="1516" height="851" alt="image" src="https://github.com/user-attachments/assets/63aaf78a-bfb5-4f82-8178-c40da25a42eb" />
 
 ---
 
@@ -161,29 +160,28 @@ The Power BI report has four pages, each answering one analytical question.
 ### 📄 Page 1 - Executive Overview
 > *"How is the business performing?"*
 
-<img width="1518" height="850" alt="image" src="https://github.com/user-attachments/assets/307950f9-25d9-465f-8a17-06f8ad2a9f5b" />
+<img width="1516" height="851" alt="image" src="https://github.com/user-attachments/assets/7cf1a954-5223-4b3a-8fa0-4010870ba882" />
 
 KPIs, reorder behaviour curve, and order-timing patterns at a macro level.
 
 ### 📄 Page 2 - Product & Category Insight
 > *"What do customers buy?"*
 
-<img width="1517" height="848" alt="image" src="https://github.com/user-attachments/assets/ea565663-979f-45f9-a814-67ee41273266" />
+<img width="1520" height="852" alt="image" src="https://github.com/user-attachments/assets/48b5f7ad-fa6d-48ea-8324-0389fece8bd0" />
 
 Department-level volume vs reorder rate, aisle-level loyalty rankings, and a scatter plot identifying the high-volume + high-loyalty sweet spot.
 
 ### 📄 Page 3 - Customer Behaviour
 > *"Who are the customers?"*
 
-<img width="1517" height="849" alt="image" src="https://github.com/user-attachments/assets/27d1ea0e-3000-4f9a-8154-58d11a677fbf" />
+<img width="1522" height="856" alt="image" src="https://github.com/user-attachments/assets/a28b1f35-d718-4a51-9f07-3864bd549bb9" />
 
 Customer segmentation by lifetime order count, reorder cadence, and how reorder gaps shrink as customers mature.
 
 ### 📄 Page 4 - Basket & Recommendations
 > *"How do they buy together - and what should we do?"*
 
-<img width="1518" height="849" alt="image" src="https://github.com/user-attachments/assets/6ce685ba-6c21-497b-8757-7a0f2fda8858" />
-
+<img width="1520" height="855" alt="image" src="https://github.com/user-attachments/assets/9489c9dc-5612-4068-a3d2-3c70715b8d08" />
 
 Department co-purchase pairs (cross-sell candidates), basket size distribution, and products that consistently appear early in the cart (planned staples).
 
