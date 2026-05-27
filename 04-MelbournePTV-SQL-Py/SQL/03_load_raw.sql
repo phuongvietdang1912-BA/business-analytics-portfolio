@@ -23,7 +23,7 @@ GO
 
 /* ---- monthly_mode ---- */
 BULK INSERT raw.monthly_mode
-FROM N'C:\Users\Admin\Desktop\JRM\Melbourne PTV\data\cleaned\clean_monthly_mode.csv'
+FROM N'your path for clean_monthly_mode.csv'
 WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',',
       ROWTERMINATOR = '0x0d0a', CODEPAGE = '65001', KEEPNULLS, TABLOCK);
 PRINT 'Loaded raw.monthly_mode';
@@ -31,7 +31,7 @@ GO
 
 /* ---- stations ---- */
 BULK INSERT raw.stations
-FROM N'C:\Users\Admin\Desktop\JRM\Melbourne PTV\data\cleaned\clean_stations.csv'
+FROM N'your path for clean_stations.csv'
 WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',',
       ROWTERMINATOR = '0x0d0a', CODEPAGE = '65001', KEEPNULLS, TABLOCK);
 PRINT 'Loaded raw.stations';
@@ -39,7 +39,7 @@ GO
 
 /* ---- daytype_mode ---- */
 BULK INSERT raw.daytype_mode
-FROM N'C:\Users\Admin\Desktop\JRM\Melbourne PTV\data\cleaned\clean_daytype_mode.csv'
+FROM N'your path for clean_daytype_mode.csv'
 WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',',
       ROWTERMINATOR = '0x0d0a', CODEPAGE = '65001', KEEPNULLS, TABLOCK);
 PRINT 'Loaded raw.daytype_mode';
@@ -47,7 +47,7 @@ GO
 
 /* ---- mode_dim ---- */
 BULK INSERT raw.mode_dim
-FROM N'C:\Users\Admin\Desktop\JRM\Melbourne PTV\data\cleaned\clean_mode_dim.csv'
+FROM N'your path for clean_mode_dim.csv'
 WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',',
       ROWTERMINATOR = '0x0d0a', CODEPAGE = '65001', TABLOCK);
 PRINT 'Loaded raw.mode_dim';
