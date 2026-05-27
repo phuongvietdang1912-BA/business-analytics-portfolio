@@ -277,7 +277,6 @@ python clean_sources.py --input ../data/raw/ --output ../data/cleaned/
 ├── README.md
 ├── docs/
 │   ├── DATA_SOURCES.md          # every source URL, schema, quirk
-│   ├── BUILD_PLAN.md            # day-by-day build plan
 │   └── data_dictionary.md       # column meanings
 ├── python/
 │   └── clean_sources.py         # clean + conform the 4 sources
