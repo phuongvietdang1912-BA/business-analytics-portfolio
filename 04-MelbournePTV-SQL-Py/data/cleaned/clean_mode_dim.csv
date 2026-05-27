@@ -1,0 +1,7 @@
+mode_canonical,mode_label,network
+metro_train,Metropolitan Train,metro
+metro_tram,Metropolitan Tram,metro
+metro_bus,Metropolitan Bus,metro
+regional_train,Regional Train,regional
+regional_coach,Regional Coach,regional
+regional_bus,Regional Bus,regional
