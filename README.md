@@ -2,7 +2,7 @@
 
 Business Analytics professional combining a Master's degree (Deakin University) with 4+ years of CRM and customer-data experience at Microsoft. I translate business problems into analytical solutions using **SQL, Python, and Power BI** -and communicate insights to both technical and non-technical stakeholders.
 
-This repository collects three end-to-end projects, each built around a real business problem and focused on **actionable insight, not just analysis**.
+This repository collects four end-to-end projects, each built around a real business problem and focused on **actionable insight, not just analysis**.
 
 📍 Melbourne, Australia · Open to Business Analyst / Data Analyst roles
 
