@@ -32,7 +32,7 @@ Three deliberate choices sit behind that, each of which I can defend:
 
 **Validated, not assumed.** Rather than trust that the top 20% mattered, I measured the share of total revenue each band actually captured — turning a convention into evidence.
 
-![Illustrative value-segmentation figure](wva_value_segmentation_illustrative.png)
+<img width="2449" height="961" alt="image" src="https://github.com/user-attachments/assets/345b0795-9222-45ba-b450-515ec8e436a8" />
 
 ## What I found
 
